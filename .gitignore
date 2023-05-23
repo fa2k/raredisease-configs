@@ -1,4 +1,5 @@
 nf-core-raredisease-*/
-refData/
+refData/*
+!refData/.gitkeep
 ._*
 .DS_Store
