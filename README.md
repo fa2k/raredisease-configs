@@ -12,7 +12,7 @@ RD pipeline, custom config & ref data location:
 The raredisease pipeline was downloaded using nf-core tools on 22 May 2023.
 
 
-docker run -ti --rm -v $PWD:$PWD -w $PWD nfcore nf-core download -r dev -c singularity raredisease
+    docker run -ti --rm -v $PWD:$PWD -w $PWD nfcore nf-core download -r dev -c singularity raredisease
 
 Current commit on `dev` branch in github downloaded:
 
@@ -67,8 +67,8 @@ Date: 22 May 2023
 Into: /cluster/projects/p164/raredisease/refData
 Unpacked in refdata: tar xf Homo_sapiens_NCBI_GRCh38.tar.gz
 
-$ md5sum Homo_sapiens_NCBI_GRCh38.tar.gz
-61d263698f0283075f63b1514a16045d  Homo_sapiens_NCBI_GRCh38.tar.gz
+    $ md5sum Homo_sapiens_NCBI_GRCh38.tar.gz
+    61d263698f0283075f63b1514a16045d  Homo_sapiens_NCBI_GRCh38.tar.gz
 
 
 
@@ -88,7 +88,8 @@ Downloaded from Ensembl website https://www.ensembl.org/info/docs/tools/vep/scri
 https://ftp.ensembl.org/pub/release-107/variation/indexed_vep_cache/homo_sapiens_merged_vep_107_GRCh38.tar.gz
 
 Untarred in /cluster/projects/p164/raredisease/refData/vep_cache/
-$ tar xf homo_sapiens_merged_vep_107_GRCh38.tar.gz
+
+    $ tar xf homo_sapiens_merged_vep_107_GRCh38.tar.gz
 
 
 
@@ -107,8 +108,8 @@ https://raw.githubusercontent.com/nf-core/test-datasets/raredisease/reference/ve
 Plugins are installed into the vep_cache dir using the following script. Internet access and
 Docker is required.
 
-$ cd scripts
-$ bash install-vep-plugins.sh
+    $ cd scripts
+    $ bash install-vep-plugins.sh
 
 
 * Additional reference data for SpliceAI from Illumina (only available after BaseSpace login) *
@@ -120,18 +121,19 @@ https://basespace.illumina.com/s/otSPW8hnhaZR
 Download from basespace folder: Analysis: genome_scores_v1.3
 Place these in vep_cache dir (? TODO checking).
 
-beb5b6e3adbe45abfe3aaf2d9776f932  spliceai_scores.raw.indel.hg38.vcf.gz
-ef01ec815c35ce32adc3d65cab62df67  spliceai_scores.raw.indel.hg38.vcf.gz.tbi
-b3ac9315317e6bea43fb8dd5797fcba4  spliceai_scores.raw.snv.hg38.vcf.gz
-cb7b1b692961fe148aab87dcee823d84  spliceai_scores.raw.snv.hg38.vcf.gz.tbi
+    beb5b6e3adbe45abfe3aaf2d9776f932  spliceai_scores.raw.indel.hg38.vcf.gz
+    ef01ec815c35ce32adc3d65cab62df67  spliceai_scores.raw.indel.hg38.vcf.gz.tbi
+    b3ac9315317e6bea43fb8dd5797fcba4  spliceai_scores.raw.snv.hg38.vcf.gz
+    cb7b1b692961fe148aab87dcee823d84  spliceai_scores.raw.snv.hg38.vcf.gz.tbi
 
 
 
 ### Intervals files
 
 Create bed files and interval_lists from genome dict file using the following script:
-$ cd scripts/
-$ bash create-bed-and-intervals.sh
+
+    $ cd scripts/
+    $ bash create-bed-and-intervals.sh
 
 As it stands, this script requires docker. It could be rewritten to use singularity.
 
@@ -142,18 +144,18 @@ As it stands, this script requires docker. It could be rewritten to use singular
 Mitochondrial-only reference, and shifted mitochondrial reference is created using the
 gatk docker image - running the following script:
 
-$ cd scripts/
-$ bash create-mito-references.sh
+    $ cd scripts/
+    $ bash create-mito-references.sh
 
 The GATK intervals files with coordinates of the control region are crafted manually.
 These are stored in scripts directory.
 
-==> chrM_non_control.intervals <==
-chrM:577-16023
+    ==> chrM_non_control.intervals <==
+    chrM:577-16023
 
-==> chrM_shifted_non_control.intervals <==
-chrM:1-4454
-chrM:5577-16569
+    ==> chrM_shifted_non_control.intervals <==
+    chrM:1-4454
+    chrM:5577-16569
 
 
 
