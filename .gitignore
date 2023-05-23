@@ -1,2 +1,4 @@
 nf-core-raredisease-*/
 refData/
+._*
+.DS_Store
