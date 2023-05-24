@@ -158,7 +158,37 @@ These are stored in scripts directory.
     chrM:5577-16569
 
 
+### gnomAD
+
+gnomAD data downloaded from: https://gnomad.broadinstitute.org/downloads#v3
+
+Genomes: There are two vcf files per chromosome:
+
+    gnomad.genomes.v3.1.2.hgdp_tgp.chr19.vcf.bgz
+    gnomad.genomes.v3.1.2.sites.chr19.vcf.bgz
+
+The sites files are used to create the combined gnomad vcf file:
+
+    gnomad.genomes.v3.1.2.sites.af.vcf.bgz
+
+This file is generated using `scripts/make-gnomad-af-file.sh`.
+
+Gnomad mitochondrial data file is tiny and doesn't need to be reformatted.
+It is used by vcfanno. Downloaded from:
+
+https://storage.googleapis.com/gcp-public-data--gnomad/release/3.1/vcf/genomes/gnomad.genomes.v3.1.sites.chrM.vcf.bgz and https://storage.googleapis.com/gcp-public-data--gnomad/release/3.1/vcf/genomes/gnomad.genomes.v3.1.sites.chrM.vcf.bgz.tbi
+
+
+### CADD
+
+Files containing only CADD scores, not all annotations, are downloaded for
+use in vcfanno.
+
+* https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/whole_genome_SNVs.tsv.gz
+* https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/whole_genome_SNVs.tsv.gz.tbi
+
+
 
 ### vcfanno
 
-
+vcfanno files. 
