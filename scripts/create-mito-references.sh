@@ -8,4 +8,3 @@ docker run -ti --rm -v `realpath ../refData`:/data -w /data broadinstitute/gatk:
 	gatk CreateSequenceDictionary R=chrM.fa O=chrM.dict
 	gatk ShiftFasta -R chrM.fa -O chrM_shifted.fa --shift-back-output chrM_shifted.shift_back.chain --shift-offset-list 5000
 '
-cp ../customRefData/chrM*non_control*.intervals ../refData/mito/

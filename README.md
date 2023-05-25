@@ -60,6 +60,7 @@ General config files for running raredisease pipeline (in /cluster/projects/p164
 Everything below is about reference data!
 
 
+
 ### iGenomes NCBI GRCh38 reference sequence and index files
 
 Downloaded from https://support.illumina.com/sequencing/sequencing_software/igenome.html
@@ -179,6 +180,15 @@ It is used by vcfanno. Downloaded from:
 https://storage.googleapis.com/gcp-public-data--gnomad/release/3.1/vcf/genomes/gnomad.genomes.v3.1.sites.chrM.vcf.bgz and https://storage.googleapis.com/gcp-public-data--gnomad/release/3.1/vcf/genomes/gnomad.genomes.v3.1.sites.chrM.vcf.bgz.tbi
 
 
+### gnomAD tab file
+
+The `gnomad_af` argument expects a tab.gz file, not a VCF. Run:
+
+    cd scripts/
+    bash convert-gnomad-to-tsv.sh
+
+
+
 ### CADD
 
 Files containing only CADD scores, not all annotations, are downloaded for
@@ -190,5 +200,8 @@ use in vcfanno.
 
 
 ### vcfanno
+
+vcfanno_resources.txt:
+
 
 vcfanno files. 

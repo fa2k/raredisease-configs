@@ -1,0 +1,6 @@
+/data/nobackup/work/raredisease/refData/gnomad.genomes.v3.1.2.sites.af.vcf.bgz
+/data/nobackup/work/raredisease/refData/gnomad.genomes.v3.1.2.sites.af.vcf.bgz.tbi
+/data/nobackup/work/raredisease/refData/gnomad.genomes.v3.1.sites.chrM.vcf.bgz
+/data/nobackup/work/raredisease/refData/gnomad.genomes.v3.1.sites.chrM.vcf.bgz.tbi
+/data/nobackup/work/raredisease/refData/CADD/whole_genome_SNVs.tsv.gz
+/data/nobackup/work/raredisease/refData/CADD/whole_genome_SNVs.tsv.gz.tbi
