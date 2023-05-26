@@ -17,5 +17,6 @@ docker run  -ti --rm -u $UID:$GID \
 # Download reference files
 wget -O ../refData/vep_cache/pLI_values_107.txt https://raw.githubusercontent.com/Ensembl/VEP_plugins/release/107/pLI_values.txt
 wget -O ../refData/vep_cache/LoFtool_scores.txt https://raw.githubusercontent.com/Ensembl/VEP_plugins/release/107/LoFtool_scores.txt
+wget -O - http://hollywood.mit.edu/burgelab/maxent/download/fordownload.tar.gz | (cd ../refData/vep_cache; tar xz)
 
 

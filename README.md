@@ -41,7 +41,17 @@ Location of actual raredisease pipeline in TSD is:
 
 module load Nextflow/22.10.6
 
-TODO
+    export NFX_SINGULARITY_CACHEDIR=../raredisease/nf-core-raredisease-dev/singularity-images
+
+    nice ~/bin/nextflow run \
+        ../raredisease/nf-core-raredisease-dev/workflow \
+        -c ../raredisease/medGenConfigs/nepe-settings.conf \
+        -params-file ../raredisease/medGenConfigs/grch38-params.yaml \
+        --input samples.csv \
+        --max_memory '62.GB' \
+        --max_cpus 32 \
+        -profile singularity \
+        -resume
 
 
 ## Config
@@ -112,6 +122,12 @@ Docker is required.
     $ cd scripts
     $ bash install-vep-plugins.sh
 
+Script executed & downloads performed 2023-05-26. Accessed:
+
+- https://raw.githubusercontent.com/Ensembl/VEP_plugins/release/107/pLI_values.txt
+- https://raw.githubusercontent.com/Ensembl/VEP_plugins/release/107/LoFtool_scores.txt
+- http://hollywood.mit.edu/burgelab/maxent/download/fordownload.tar.gz
+
 
 * Additional reference data for SpliceAI from Illumina (only available after BaseSpace login) *
 
@@ -119,8 +135,11 @@ Download link here:
 https://basespace.illumina.com/s/otSPW8hnhaZR
 
 
-Download from basespace folder: Analysis: genome_scores_v1.3
-Place these in vep_cache dir (? TODO checking).
+Download from basespace folder: Analysis: **genome_scores_v1.3**. Downloaded: **2023-05-25**.
+
+Place these in vep_cache dir. The vep config `ext.args` is defined in the workflow repo
+`nf-core-raredisease-dev/workflow/conf/modules/annotate_snvs.config`. The override in
+`medGenConfigs/process-overrides.conf` sets the following paths.
 
     beb5b6e3adbe45abfe3aaf2d9776f932  spliceai_scores.raw.indel.hg38.vcf.gz
     ef01ec815c35ce32adc3d65cab62df67  spliceai_scores.raw.indel.hg38.vcf.gz.tbi
