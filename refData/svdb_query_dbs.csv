@@ -1,0 +1,2 @@
+filename,in_freq_info_key,in_allele_count_info_key,out_freq_info_key,out_allele_count_info_key,use_in_freq_filter
+refData/gnomad_v2.1_sv.sites.vcf.gz,AF,AC,gnomad_svAF,gnomad_svAC,1

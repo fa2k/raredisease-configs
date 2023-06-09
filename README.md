@@ -9,19 +9,13 @@ RD pipeline, custom config & ref data location:
 
 # Pipeline & Container images
 
-The raredisease pipeline was downloaded using nf-core tools on 22 May 2023.
+The raredisease pipeline is downloaded using the script: `download-pipeline-script.sh`.
+There are comments on what to do if using docker instead of singularity.
+The version should be selected in the script, but currently `dev` is used for testing.
 
+TODO - still not for production
 
-    docker run -ti --rm -v $PWD:$PWD -w $PWD nfcore nf-core download -r dev -c singularity raredisease
-
-Current commit on `dev` branch in github downloaded:
-
-TODO this will be updated - not use for production load
-
-
-(nfcore docker image created from Dockerfile: https://github.com/fa2k/dockerfiles/tree/main/nfcore-singularity)
-
-Location of actual raredisease pipeline in TSD is:
+Location of actual raredisease pipeline in TSD is (TODO/TBC):
 /cluster/projects/p164/raredisease
 
 
@@ -69,6 +63,7 @@ General config files for running raredisease pipeline (in /cluster/projects/p164
 
 Everything below is about reference data!
 
+**The date here should be updated when new reference data are downloaded.** The old reference data may be moved into `archive/`.
 
 
 ### iGenomes NCBI GRCh38 reference sequence and index files
@@ -162,21 +157,7 @@ As it stands, this script requires docker. It could be rewritten to use singular
 
 ### Mitochondrial genome
 
-Mitochondrial-only reference, and shifted mitochondrial reference is created using the
-gatk docker image - running the following script:
-
-    $ cd scripts/
-    $ bash create-mito-references.sh
-
-The GATK intervals files with coordinates of the control region are crafted manually.
-These are stored in scripts directory.
-
-    ==> chrM_non_control.intervals <==
-    chrM:577-16023
-
-    ==> chrM_shifted_non_control.intervals <==
-    chrM:1-4454
-    chrM:5577-16569
+(It used to be necessary to supply MT reference files. This is now integrated in the pipeline.)
 
 
 ### gnomAD
@@ -210,6 +191,15 @@ The `gnomad_af` argument expects a tab.gz file, not a VCF. Run:
     bash convert-gnomad-to-tsv.sh
 
 
+### gnomAD SV
+
+Gnomad SV is only available for version 2.1.
+
+Downloaded from the gnomAD servers:
+
+* https:////storage.googleapis.com/gcp-public-data--gnomad/papers/2019-sv/gnomad_v2.1_sv.sites.vcf.gz
+
+
 
 ### CADD
 
@@ -223,59 +213,33 @@ use in vcfanno.
 
 ### vcfanno
 
-vcfanno_resources.txt:
+Manually created file with a list of the paths to go into vcfanno:
+
+* vcfanno_resources.txt
 
 
-vcfanno files. 
+### svdb
+
+* svdb_query_dbs.csv
+
+1. Copied from the test dataset (https://github.com/nf-core/test-datasets/blob/raredisease/reference/svdb_querydb_files.csv)
+2. Modified the path.
 
 
-### CRASH NOTE TODO 
--[nf-core/raredisease] Pipeline completed with errors-
-Error executing process > 'NFCORE_RAREDISEASE:RAREDISEASE:RANK_VARIANTS_SNV:GENMOD_SCORE (Marius)'
+### ClinVar
 
-Caused by:
-  Process `NFCORE_RAREDISEASE:RAREDISEASE:RANK_VARIANTS_SNV:GENMOD_SCORE (Marius)` terminated with an error exit status (1)
+Downloaded from:
 
-Command executed:
+https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/
 
-  genmod \
-      score \
-       --rank_results  \
-      --family_file Marius.ped \
-      --score_config rank_model_snv_dev.ini \
-      --outfile Marius_score.vcf \
-      Marius_models.vcf
-  
-  cat <<-END_VERSIONS > versions.yml
-  "NFCORE_RAREDISEASE:RAREDISEASE:RANK_VARIANTS_SNV:GENMOD_SCORE":
-      genmod: $(echo $(genmod --version 2>&1) | sed 's/^.*genmod version: //' )
-  END_VERSIONS
+On 2023-06-09.
 
-Command exit status:
-  1
-
-Command output:
-  (empty)
-
-Command error:
-  WARNING: DEPRECATED USAGE: Environment variable SINGULARITYENV_NXF_DEBUG will not be supported in the future, use APPTAINERENV_NXF_DEBUG instead
-  [2023-05-26 19:26:40,736] WARNING : genmod.score_variants.check_plugins: INFO field SPIDEX is not in vcf INFO. This field will not be scored.
-  [2023-05-26 19:26:40,736] WARNING : genmod.score_variants.check_plugins: INFO field SWEGENAF is not in vcf INFO. This field will not be scored.
-  [2023-05-26 19:26:40,736] WARNING : genmod.score_variants.check_plugins: INFO field MTAF is not in vcf INFO. This field will not be scored.
-  [2023-05-26 19:26:40,736] WARNING : genmod.score_variants.check_plugins: INFO field Frq is not in vcf INFO. This field will not be scored.
-  [2023-05-26 19:26:40,736] WARNING : genmod.score_variants.check_plugins: CSQ field REVEL_score is not in csq annotation. This field will not be scored.
-  [2023-05-26 19:26:40,736] WARNING : genmod.score_variants.check_plugins: CSQ field GERP++_RS is not in csq annotation. This field will not be scored.
-  [2023-05-26 19:26:40,736] WARNING : genmod.score_variants.check_plugins: CSQ field phastCons100way_vertebrate is not in csq annotation. This field will not be scored.
-  [2023-05-26 19:26:40,736] WARNING : genmod.score_variants.check_plugins: CSQ field phyloP100way_vertebrate is not in csq annotation. This field will not be scored.
-  [2023-05-26 19:26:40,736] WARNING : genmod.score_variants.check_plugins: CSQ field CLINVAR_CLNSIG is not in csq annotation. This field will not be scored.
-  [2023-05-26 19:26:40,736] WARNING : genmod.score_variants.check_plugins: CSQ field CLINVAR_CLNREVSTAT is not in csq annotation. This field will not be scored
-  [2023-05-26 19:26:40,736] ERROR   : genmod.commands.score_variants: All score plugins has to be defined in vcf header
-  Aborted!
-
-Work dir:
-  /data/nobackup/work/genom/work/1d/5949193bb0d8dac8d24a8eaccf6793
-
-Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+    9379313cbfdb0abb8ff7b40b0ae8d810  clinvar.vcf.gz
+    9b9c76380c565b395fea00bf09681035  clinvar.vcf.gz.tbi
 
 
+
+### genmod - rank_model_snv.ini / rank_model_sv.ini
+
+Initially copied from the test datasets and Clinical Genomics's configs (https://github.com/Clinical-Genomics/reference-files/tree/master/rare-disease/annotation).
 
