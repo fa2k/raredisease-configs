@@ -303,3 +303,12 @@ On 2023-06-09.
 
 Initially copied from the test datasets and Clinical Genomics's configs (https://github.com/Clinical-Genomics/reference-files/tree/master/rare-disease/annotation).
 
+
+
+# Packing for TSD
+
+When pipeline is updated, but not reference data, transfer with tar. Adapt to your specific needs...
+
+```
+$ tar cfz raredisease.tar.gz raredisease/{README.md,download-pipeline-script.sh,medGenConfigs,nf-core-raredisease-dev,scripts,refData/vcfanno_resources_template.txt,.gitignore}
+```
