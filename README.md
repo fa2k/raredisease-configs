@@ -76,10 +76,13 @@ to the fastq file locations under `durable/WGS/data_fastq` (this is available fr
 
 2. Create a link named `ref` to the reference data directory (this allows us to use relative paths in the parameter file).
 
+```
     ln -s ../../durable/raredisease/refData ref
+```
 
 3. Create the script file. 
 
+```
     module load singularity/3.7.3
     
     /tsd/p164/data/durable/raredisease/nextflow-23.06.0-edge-all run \
@@ -93,10 +96,15 @@ to the fastq file locations under `durable/WGS/data_fastq` (this is available fr
         --max_cpus 64 \
         -profile singularity \
         -resume
+```
 
 4. Check kerberos ticket lifetime is renewable for a week or more `klist`. (TODO TBC it never is though)
 
 5. Log on to `p164-submit`, go to the active analysis directory for the project, and run `bash script.sh`.
+
+6. Wait {5} days on average for it to finish (TODO update time).
+
+7. Delete `work` and move the project directory to `/tsd/p164/data/durable/WGS/analysis/<project>`.
 
 
 
@@ -104,10 +112,10 @@ to the fastq file locations under `durable/WGS/data_fastq` (this is available fr
 
 General config files for running raredisease pipeline (in /tsd/p164/data/durable/raredisease/medGenConfigs):
 
-* process-overrides.conf: Fine-tuning of resource allocations, and customisations/work-arounds that apply for all environments.
-* tsd-settings.conf: TSD Cluster options
-* *xxx*-settings.conf: Options for running on other systems (for development and testing)
-* grch38-params.yaml: Pipeline configuration and reference data options
+* `process-overrides.conf`: Fine-tuning of resource allocations, and customisations/work-arounds that apply for all environments.
+* `tsd-settings.conf`: TSD Cluster options
+* `xxx-settings.conf`: Options for running on other systems (for development and testing)
+* `grch38-params.yaml`: Pipeline configuration and reference data options
 
 
 # Reference data
