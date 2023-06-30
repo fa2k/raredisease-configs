@@ -213,9 +213,10 @@ use in vcfanno.
 
 ### vcfanno
 
-Manually created file with a list of the paths to go into vcfanno:
+vcfanno resources has to be absolute paths. The script `make-vcfanno-resources.sh` can be run
+to produce `vcfanno_resources.txt` based on the current working directory.
 
-* vcfanno_resources.txt
+Run from repo root, i.e.: `bash scripts/make-vcfanno-resources.sh`.
 
 
 ### svdb

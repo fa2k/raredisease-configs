@@ -13,5 +13,6 @@ refData/Homo_sapiens_NCBI_GRCh38.tar.gz
 refData/README.txt
 refData/variant_catalog_grch38.json
 refData/vep_cache
+refData/vcfanno_resources.txt
 ._*
 .DS_Store

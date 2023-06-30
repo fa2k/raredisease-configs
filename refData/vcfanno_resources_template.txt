@@ -1,0 +1,6 @@
+gnomad.genomes.v3.1.2.sites.af.vcf.bgz
+gnomad.genomes.v3.1.2.sites.af.vcf.bgz.tbi
+gnomad.genomes.v3.1.sites.chrM.vcf.bgz
+gnomad.genomes.v3.1.sites.chrM.vcf.bgz.tbi
+CADD/whole_genome_SNVs.tsv.gz
+CADD/whole_genome_SNVs.tsv.gz.tbi
