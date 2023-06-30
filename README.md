@@ -1,27 +1,56 @@
-# Notes - Rare Disease Pipeline
+# Rare Disease Pipeline configuration files and reference data
 
-RD pipeline, custom config & ref data location:
+RD pipeline, custom config & ref data location in TSD:
 
-/cluster/projects/p164/raredisease/
+/tsd/p164/data/durable/raredisease
+
+This configuration and code is hosted on Github at https://github.com/fa2k/raredisease-configs.
+The instructions for assembling all the reference data are given below, but the reference files themselves
+are not stored in git (they are listed in .gitignore).
 
 
+## Link to actual nf-core/raredisease pipeline:
+
+Documentation: https://nf-co.re/raredisease
+
+Github: https://github.com/nf-core/raredisease
 
 
-# Pipeline & Container images
+# Repository overview
 
-The raredisease pipeline is downloaded using the script: `download-pipeline-script.sh`.
-There are comments on what to do if using docker instead of singularity.
+The pipeline and container images are stored under `nf-core-raredisease-dev`.
+
+The container images are also cached under `singularity`, to make it quicker to download
+updates to the pipeline.
+
+The reference datasets are stored under `refData`. Most of the reference data have to
+be downloaded or generated (see below). Scripts to download or prepare the reference
+files are under `scripts`.
+
+
+# Nextflow version
+
+At the moment we have to use a patched Nextflow that supports the `memPerCpu` option.
+This is in the Nexflow development repository, and will be added to Nextflow some time in 2023.
+
+Nextflow: `/tsd/p164/data/durable/raredisease/nextflow-23.06.0-edge-all`.
+
+
+# Downloading the pipeline and singularity images
+
+The raredisease pipeline is downloaded using the script: `download-pipeline-script.sh`,
+which calls `nf-core` tools. The tools can be installed using conda. See:
+
+https://nf-co.re/tools/#installation
+
+...and make sure to follow the instructions to install bioconda. (The temporary `-c bioconda`
+doesn't seem to work).
 The version should be selected in the script, but currently `dev` is used for testing.
-
-TODO - still not for production
-
-Location of actual raredisease pipeline in TSD is (TODO/TBC):
-/cluster/projects/p164/raredisease
-
-
 
 
 # Sample sheet 
+
+https://nf-co.re/raredisease/1.0.0/usage#samplesheet
 
 * sample: Name for a specific individual
 * sex: 1=male, 2=female
@@ -29,48 +58,70 @@ Location of actual raredisease pipeline in TSD is (TODO/TBC):
 * case_id: Name for the trio (or singleton) as a whole
 * maternal_id, paternal_id: sample name of mother and father or 0 if not present
 
+Create a sample sheet file for a trio or singleton. If there are multiple fastq file pairs for a sample,
+they can all be used by adding multiple lines.
 
 
-# Pipeline execution procedure (TODO)
+# Running the pipeline
 
-module load Nextflow/22.10.6
 
-    export NFX_SINGULARITY_CACHEDIR=../raredisease/nf-core-raredisease-dev/singularity-images
+The fastq files should be in: `/tsd/p164/data/durable/WGS/data_fastq/<project>`.
 
-    nice ~/bin/nextflow run \
-        ../raredisease/nf-core-raredisease-dev/workflow \
-        -c ../raredisease/medGenConfigs/nepe-settings.conf \
+The finsihed analyses should be in: `/tsd/p164/data/durable/WGS/analysis/<project>`.
+
+The analysis can be started and run under: `/tsd/p164/data/no-backup/active-wgs-analyses/<project>`.
+
+1. Create the sample sheet (`samples.csv`) and a script file in the active analysis dir. The sample sheet should refer directly
+to the fastq file locations under `durable/WGS/data_fastq` (this is available from the cluster nodes).
+
+2. Create a link named `ref` to the reference data directory (this allows us to use relative paths in the parameter file).
+
+    ln -s ../../durable/raredisease/refData ref
+
+3. Create the script file. 
+
+    module load singularity/3.7.3
+    
+    /tsd/p164/data/durable/raredisease/nextflow-23.06.0-edge-all run \
+        /tsd/p164/data/durable/raredisease/nf-core-raredisease-dev/workflow \
+        -c ../raredisease/medGenConfigs/process-overrides.conf \
+        -c ../raredisease/medGenConfigs/tsd-settings.conf \
         -params-file ../raredisease/medGenConfigs/grch38-params.yaml \
         --input samples.csv \
-        --max_memory '62.GB' \
-        --max_cpus 32 \
+        --outdir results \
+        --max_memory '500 GB' \
+        --max_cpus 64 \
         -profile singularity \
         -resume
+
+4. Check kerberos ticket lifetime is renewable for a week or more `klist`. (TODO TBC it never is though)
+
+5. Log on to `p164-submit`, go to the active analysis directory for the project, and run `bash script.sh`.
+
 
 
 ## Config
 
-General config files for running raredisease pipeline (in /cluster/projects/p164/raredisease/medGenConfigs):
+General config files for running raredisease pipeline (in /tsd/p164/data/durable/raredisease/medGenConfigs):
 
+* process-overrides.conf: Fine-tuning of resource allocations, and customisations/work-arounds that apply for all environments.
 * tsd-settings.conf: TSD Cluster options
+* *xxx*-settings.conf: Options for running on other systems (for development and testing)
 * grch38-params.yaml: Pipeline configuration and reference data options
-
-
-
 
 
 # Reference data
 
 Everything below is about reference data!
 
-**The date here should be updated when new reference data are downloaded.** The old reference data may be moved into `archive/`.
+**The details here should be updated when new reference data are downloaded.** The old reference data may be moved into `archive/`.
 
 
 ### iGenomes NCBI GRCh38 reference sequence and index files
 
 Downloaded from https://support.illumina.com/sequencing/sequencing_software/igenome.html
 Date: 22 May 2023
-Into: /cluster/projects/p164/raredisease/refData
+Into: /tsd/p164/data/durable/raredisease/refData
 Unpacked in refdata: tar xf Homo_sapiens_NCBI_GRCh38.tar.gz
 
     $ md5sum Homo_sapiens_NCBI_GRCh38.tar.gz
@@ -84,7 +135,7 @@ Downloaded from Stranger github repo (github.com/Clinical-Genomics/stranger): ht
 
 Commit of Nov 15 2021 / 9fa3652
 
-/cluster/projects/p164/raredisease/refData/variant_catalog_grch38.json
+/tsd/p164/data/durable//raredisease/refData/variant_catalog_grch38.json
 
 
 
@@ -94,7 +145,7 @@ Downloaded from Ensembl website https://www.ensembl.org/info/docs/tools/vep/scri
 
 https://ftp.ensembl.org/pub/release-107/variation/indexed_vep_cache/homo_sapiens_merged_vep_107_GRCh38.tar.gz
 
-Untarred in /cluster/projects/p164/raredisease/refData/vep_cache/
+Untarred in /tsd/p164/data/durable//raredisease/refData/vep_cache/
 
     $ tar xf homo_sapiens_merged_vep_107_GRCh38.tar.gz
 
