@@ -1,6 +1,7 @@
 genome: "GRCh38"
 fasta: "ref/Homo_sapiens/NCBI/GRCh38/Sequence/WholeGenomeFasta/genome.fa"
 bwa: "ref/Homo_sapiens/NCBI/GRCh38/Sequence/BWAIndex/version0.6.0/"
+bwamem2: "ref/bwamem2"
 variant_catalog: "ref/variant_catalog_grch38.json"
 vep_cache_version: 107
 vep_cache: "ref/vep_cache"
