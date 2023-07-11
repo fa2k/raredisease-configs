@@ -83,19 +83,23 @@ to the fastq file locations under `durable/WGS/data_fastq` (this is available fr
 3. Create the script file. 
 
 ```
-    module load singularity/3.7.3
-    
-    /tsd/p164/data/durable/raredisease/nextflow-23.06.0-edge-all run \
-        /tsd/p164/data/durable/raredisease/nf-core-raredisease-dev/workflow \
-        -c ../raredisease/medGenConfigs/process-overrides.conf \
-        -c ../raredisease/medGenConfigs/tsd-settings.conf \
-        -params-file ../raredisease/medGenConfigs/grch38-params.yaml \
-        --input samples.csv \
-        --outdir results \
-        --max_memory '500 GB' \
-        --max_cpus 64 \
-        -profile singularity \
-        -resume
+module load singularity/3.7.3
+module load Java/11.0.2
+
+export TMPDIR=/tsd/p164/data/no-backup/active-wgs-analyses/tmp
+
+/tsd/p164/data/durable/raredisease/nextflow-23.06.0-edge-all run \
+	/tsd/p164/data/durable/raredisease/nf-core-raredisease-dev/workflow \
+	-c /tsd/p164/data/durable/raredisease/medGenConfigs/process-overrides.conf \
+	-c /tsd/p164/data/durable/raredisease/medGenConfigs/tsd-settings.conf \
+	-params-file /tsd/p164/data/durable/raredisease/medGenConfigs/grch38-params.yaml \
+	--input samples.csv \
+	--outdir results \
+	--max_memory '500 GB' \
+	--max_cpus 64 \
+	-profile singularity \
+	-resume
+
 ```
 
 4. Check kerberos ticket lifetime is renewable for a week or more `klist`. (TODO TBC it never is though)
@@ -303,12 +307,3 @@ On 2023-06-09.
 
 Initially copied from the test datasets and Clinical Genomics's configs (https://github.com/Clinical-Genomics/reference-files/tree/master/rare-disease/annotation).
 
-
-
-# Packing for TSD
-
-When pipeline is updated, but not reference data, transfer with tar. Adapt to your specific needs...
-
-```
-$ tar cfz raredisease.tar.gz raredisease/{README.md,download-pipeline-script.sh,medGenConfigs,nf-core-raredisease-dev,scripts,refData/vcfanno_resources_template.txt,.gitignore}
-```
