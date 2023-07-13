@@ -129,6 +129,14 @@ Everything below is about reference data!
 **The details here should be updated when new reference data are downloaded.** The old reference data may be moved into `archive/`.
 
 
+### bwamem2 index
+
+bwamem2 index is precomputed to save time. The script `make-bwamem2.sh` handles this:
+
+    $ cd scripts/
+    $ bash make-bwamem2.sh
+
+
 ### iGenomes NCBI GRCh38 reference sequence and index files
 
 Downloaded from https://support.illumina.com/sequencing/sequencing_software/igenome.html
