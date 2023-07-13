@@ -284,18 +284,24 @@ use in vcfanno.
 
 ### vcfanno
 
-vcfanno resources has to be absolute paths. The script `make-vcfanno-resources.sh` can be run
-to produce `vcfanno_resources.txt` based on the current working directory.
+vcfanno resources has to be absolute paths. The script `make-absolute-paths.sh` can be run
+to produce `vcfanno_resources.txt` based on the path of the repository root directory.
 
-Run from repo root, i.e.: `bash scripts/make-vcfanno-resources.sh`.
+Run from scripts directory (like all the other scripts):
+
+    cd scripts
+    bash make-absolute-paths.sh
+
+This also absolutises the path for svdb; see next section.
 
 
 ### svdb
 
-* svdb_query_dbs.csv
+* svdb_query_dbs_template.csv
 
 1. Copied from the test dataset (https://github.com/nf-core/test-datasets/blob/raredisease/reference/svdb_querydb_files.csv)
-2. Modified the path.
+2. The path in the template file is a placeholder (`PATH`), and it needs to be interpreted by the `make-absolute-paths.sh` script.
+3. See the above section on **vcfanno** for running the script.
 
 
 ### ClinVar

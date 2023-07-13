@@ -12,6 +12,7 @@ refData/gnomad.genomes.*.tbi
 refData/gnomad_v*_sv.sites.vcf.gz
 refData/Homo_sapiens_NCBI_GRCh38.tar.gz
 refData/README.txt
+refData/svdb_query_dbs.csv
 refData/variant_catalog_grch38.json
 refData/vep_cache
 refData/vcfanno_resources.txt
