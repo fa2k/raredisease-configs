@@ -17,5 +17,4 @@ gnomad_af: "ref/gnomad.genomes.v3.1.2.af.tab.gz"
 svdb_query_dbs: "ref/svdb_query_dbs.csv"
 score_config_sv: "ref/rank_model_sv.ini"
 mito_name: "chrM"
-skip_sv_annotation: true
 outdir: "output"
