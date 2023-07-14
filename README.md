@@ -275,7 +275,7 @@ Downloaded from the gnomAD servers:
 ### CADD
 
 Files containing only CADD scores, not all annotations, are downloaded for
-use in vcfanno.
+use in vcfanno. CADD is stored in a directory under refData with the version number.
 
 * https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/whole_genome_SNVs.tsv.gz
 * https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/whole_genome_SNVs.tsv.gz.tbi
@@ -305,6 +305,8 @@ This also absolutises the path for svdb; see next section.
 
 
 ### ClinVar
+
+ClinVar files are stored in a directory with the download date.
 
 Downloaded from:
 

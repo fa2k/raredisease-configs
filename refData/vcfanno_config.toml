@@ -21,3 +21,9 @@ names=["CADD"]
 ops=["mean"]
 columns=[6]
 
+[[annotation]]
+file="clinvar.vcf.gz"
+fields=["CLNSIG", "CLNDN"]
+ops=["self","self"]
+names=["CLNSIG", "CLNDN"]
+

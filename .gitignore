@@ -2,9 +2,8 @@ singularity
 nf-core-raredisease-*/
 refData/archive
 refData/bwamem2/
-refData/CADD/*
-refData/clinvar.vcf.gz
-refData/clinvar.vcf.gz.tbi
+refData/CADD-v*/
+refData/clinvar-*/
 refData/Homo_sapiens/**
 refData/intervals/*
 refData/gnomad.genomes.*gz
