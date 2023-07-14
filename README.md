@@ -129,6 +129,14 @@ Everything below is about reference data!
 **The details here should be updated when new reference data are downloaded.** The old reference data may be moved into `archive/`.
 
 
+### bwamem2 index
+
+bwamem2 index is precomputed to save time. The script `make-bwamem2.sh` handles this:
+
+    $ cd scripts/
+    $ bash make-bwamem2.sh
+
+
 ### iGenomes NCBI GRCh38 reference sequence and index files
 
 Downloaded from https://support.illumina.com/sequencing/sequencing_software/igenome.html
@@ -267,7 +275,7 @@ Downloaded from the gnomAD servers:
 ### CADD
 
 Files containing only CADD scores, not all annotations, are downloaded for
-use in vcfanno.
+use in vcfanno. CADD is stored in a directory under refData with the version number.
 
 * https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/whole_genome_SNVs.tsv.gz
 * https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/whole_genome_SNVs.tsv.gz.tbi
@@ -276,21 +284,29 @@ use in vcfanno.
 
 ### vcfanno
 
-vcfanno resources has to be absolute paths. The script `make-vcfanno-resources.sh` can be run
-to produce `vcfanno_resources.txt` based on the current working directory.
+vcfanno resources has to be absolute paths. The script `make-absolute-paths.sh` can be run
+to produce `vcfanno_resources.txt` based on the path of the repository root directory.
 
-Run from repo root, i.e.: `bash scripts/make-vcfanno-resources.sh`.
+Run from scripts directory (like all the other scripts):
+
+    cd scripts
+    bash make-absolute-paths.sh
+
+This also absolutises the path for svdb; see next section.
 
 
 ### svdb
 
-* svdb_query_dbs.csv
+* svdb_query_dbs_template.csv
 
 1. Copied from the test dataset (https://github.com/nf-core/test-datasets/blob/raredisease/reference/svdb_querydb_files.csv)
-2. Modified the path.
+2. The path in the template file is a placeholder (`PATH`), and it needs to be interpreted by the `make-absolute-paths.sh` script.
+3. See the above section on **vcfanno** for running the script.
 
 
 ### ClinVar
+
+ClinVar files are stored in a directory with the download date.
 
 Downloaded from:
 
