@@ -36,7 +36,7 @@ This is in the Nexflow development repository, and will be added to Nextflow som
 Nextflow: `/tsd/p164/data/durable/raredisease/nextflow-23.06.0-edge-all`.
 
 
-# Downloading the pipeline and singularity images
+# Pipeline and singularity images
 
 The raredisease pipeline is downloaded using the script: `download-pipeline-script.sh`,
 which calls `nf-core` tools. The tools can be installed using conda. See:
@@ -46,6 +46,12 @@ https://nf-co.re/tools/#installation
 ...and make sure to follow the instructions to install bioconda. (The temporary `-c bioconda`
 doesn't seem to work).
 The version should be selected in the script, but currently `dev` is used for testing.
+
+## Pipeline version used
+
+* 2023-07: The pipeline downloaded on 2023-06-09, dev branch, was used. Commit:
+  decbf4389cc3043b18c61002e023db51348e428b. This is used instead of release
+  1.0.0, as the new MT-analysis parameters are forward-compatible.
 
 
 # Sample sheet 
