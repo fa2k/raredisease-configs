@@ -19,7 +19,7 @@ Github: https://github.com/nf-core/raredisease (note: master branch is not relev
 
 # Repository overview
 
-The pipeline and container images are stored under `nf-core-raredisease-dev`.
+The pipeline and container images are stored under `nf-core-raredisease-<version>`.
 
 The container images are also cached under `singularity`, to make it quicker to download
 updates to the pipeline.
