@@ -1,20 +1,34 @@
+# Genome
 genome: "GRCh38"
 fasta: "ref/Homo_sapiens/NCBI/GRCh38/Sequence/WholeGenomeFasta/genome.fa"
 bwa: "ref/Homo_sapiens/NCBI/GRCh38/Sequence/BWAIndex/version0.6.0/"
 bwamem2: "ref/bwamem2"
-variant_catalog: "ref/variant_catalog_grch38.json"
-vep_cache_version: 107
-vep_cache: "ref/vep_cache"
-analysis_type: "wgs"
 intervals_wgs: "ref/intervals/wgs.interval_list"
 intervals_y: "ref/intervals/chrY.interval_list"
 target_bed: "ref/intervals/wgs.bed"
+mito_name: "chrM"
+
+# Config
+analysis_type: "wgs"
+outdir: "output"
+
+# Skipping
+skip_cnv_calling: true # We don't have CNV model, so have to skip gatk GermlineCNVCaller
+# TBC: MT analysis may give different annotations in chrM causing VCF tools to fail AND/OR bad sorting
+#skip_mt_anlaysis: true
+
+# Variant annotation (general / other)
+variant_catalog: "ref/variant_catalog_grch38.json"
+vep_cache_version: 107
+vep_cache: "ref/vep_cache"
+
+# Variant annotation & ranking - SNP / indel
 vcfanno_resources: "ref/vcfanno_resources.txt"
 vcfanno_toml: "ref/vcfanno_config.toml"
 #vcfanno_lua: "ref/test/vcfanno_script.lua"
 score_config_snv: "ref/rank_model_snv.ini"
 gnomad_af: "ref/gnomad.genomes.v3.1.2.af.tab.gz"
+
+# Variant annotation: SV / CNV
 svdb_query_dbs: "ref/svdb_query_dbs.csv"
 score_config_sv: "ref/rank_model_sv.ini"
-mito_name: "chrM"
-outdir: "output"

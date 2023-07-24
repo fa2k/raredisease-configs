@@ -14,7 +14,7 @@ are in `refData`.
 
 Documentation: https://nf-co.re/raredisease
 
-Github: https://github.com/nf-core/raredisease
+Github: https://github.com/nf-core/raredisease (note: master branch is not relevant. Development is done in `dev` branch.)
 
 
 # Repository overview
