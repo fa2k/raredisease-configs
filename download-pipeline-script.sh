@@ -21,6 +21,6 @@ nf-core download \
     -c singularity \
     --compress none \
     raredisease \
-    -r dev
+    -r 1.1.0
     
 
