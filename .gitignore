@@ -8,7 +8,8 @@ refData/Homo_sapiens/**
 refData/intervals/*
 refData/gnomad.genomes.*gz
 refData/gnomad.genomes.*.tbi
-refData/gnomad_v*_sv.sites.vcf.gz
+refData/nstd166.GRCh38.variant_call.vcf.gz
+refData/nstd166.GRCh38.variant_call.vcf.gz.tbi
 refData/Homo_sapiens_NCBI_GRCh38.tar.gz
 refData/README.txt
 refData/svdb_query_dbs.csv

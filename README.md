@@ -45,13 +45,18 @@ https://nf-co.re/tools/#installation
 
 ...and make sure to follow the instructions to install bioconda. (The temporary `-c bioconda`
 doesn't seem to work).
-The version should be selected in the script, but currently `dev` is used for testing.
+The version should be selected in the script and committed (as of writing 1.1.0, but check the
+script).
+
 
 ## Pipeline version used
 
+* 2023-07: Pipeline version 1.1.0.
+
 * 2023-07: The pipeline downloaded on 2023-06-09, dev branch, was used. Commit:
   decbf4389cc3043b18c61002e023db51348e428b. This is used instead of release
-  1.0.0, as the new MT-analysis parameters are forward-compatible.
+  1.0.0, as the new MT-analysis parameters are forward-compatible. This was used
+  for testing and configuration
 
 
 # Sample sheet 
@@ -270,12 +275,16 @@ The `gnomad_af` argument expects a tab.gz file, not a VCF. Run:
 
 ### gnomAD SV
 
-Gnomad SV is only available for version 2.1.
+gnomAD SV is only available for version 2.1, which is aligned to hg19. We should instead
+use a remapped version of gnomAD SV 2.1 (map to GRCh38) from dbVar. These files contain
+the allele frequencies of SVs in various populations.
 
-Downloaded from the gnomAD servers:
+Info here: https://www.ncbi.nlm.nih.gov/sites/dbvarapp/studies/nstd166/
 
-* https:////storage.googleapis.com/gcp-public-data--gnomad/papers/2019-sv/gnomad_v2.1_sv.sites.vcf.gz
+The files are downloaded from here:
 
+* https://ftp.ncbi.nlm.nih.gov/pub/dbVar/data/Homo_sapiens/by_study/vcf/nstd166.GRCh38.variant_call.vcf.gz
+* https://ftp.ncbi.nlm.nih.gov/pub/dbVar/data/Homo_sapiens/by_study/vcf/nstd166.GRCh38.variant_call.vcf.gz.tbi
 
 
 ### CADD
