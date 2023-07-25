@@ -353,3 +353,23 @@ On 2023-06-09.
 Initially copied from the test datasets and Clinical Genomics's configs (https://github.com/Clinical-Genomics/reference-files/tree/master/rare-disease/annotation).
 
 
+# DeepVariant - GPU
+
+Using GPU on deepvariant is currently only relevant for dedicated servers where GPU resources are available
+anyway (not clusters where you have to request them explicitly). The first step, `make_examples.py`, is not
+able to use GPU, and will consume about as much time as the variant calling itself.
+
+nf-core currently uses `nf-core/deepvariant:1.5.0`, but this doesn't seem to work with or without GPU.
+The previous `docker.io/google/deepvariant:1.5.0` may be used.
+
+
+To enable GPU, a separate docker image is used: `docker.io/google/deepvariant:1.5.0-gpu` as per
+DeepVariant Quick start guide https://github.com/google/deepvariant/blob/r1.5/docs/deepvariant-quick-start.md.
+
+To enable GPU in singularity, override the image, and sepcify `containerOptions`. See 
+`medGenConfigs/nepe-settings.conf`.
+
+```
+$ docker pull docker.io/google/deepvariant:1.5.0-gpu
+$ singularity build docker.io-google-deepvariant-1.5.0-gpu.img docker://docker.io/google/deepvariant:1.5.0-gpu
+```
