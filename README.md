@@ -34,8 +34,58 @@ Scripts to download or prepare the reference files are under `scripts`.
 
 # Nextflow version
 
-At the moment we have to use a patched Nextflow that supports the `memPerCpu` option.
-This is in the Nexflow development repository, and will be added to Nextflow some time in 2023.
+A nextflow version from 2023-07 or newer is required to support `perMemCpuAllocation`,
+which enables it to use the `--mem-per-cpu` option in SLURM, instead of `--mem`.
+The full package Nextflow artefacts from github, ending in `-all` are designed for
+offline use, but they can't support the necessary plugin `nf-validation` (required
+by the pipeline). Unfortunately, this means that we need a per-user nextlfow install
+in TSD, based on transferring `$HOME/.nextflow` (see 
+https://github.com/nextflow-io/nextflow/discussions/4126#discussioncomment-6539565).
+
+
+## Procedure to prepare a working nextflow for TSD
+
+1. Download the *online* nextflow binary (not -all) from Github and put it on
+   the path: https://github.com/nextflow-io/nextflow/releases. Use a computer
+   that's able to run the pipeline (for simplicity).
+
+Example:
+```
+cd $HOME/bin
+wget https://github.com/nextflow-io/nextflow/releases/download/v23.07.0-edge/nextflow
+chmod +x nextflow
+```
+
+2. Run the raredisease test to make sure all nextflow dependencies are downloaded. There's
+   no need to run the full test, just make sure it starts processing and kill it. You also
+   need to explicitly install the plugin into nextflow's home directory.
+
+```
+nextflow run nf-core/raredisease -r 1.1.0 -profile test,singularity
+rm -r results/ work/
+nextflow plugin install nf-validation@0.3.1
+```
+
+Note that `medGenConfigs/tsd-settings.conf` specifies this plugin version. The version used
+in the above command has to match the version in the config file.
+
+
+3. Copy the nextflow binary and its files across to TSD:
+
+```
+cd
+tar cf nextflow.tar .nextflow bin/nextflow
+tacl p164 --upload nextflow.tar
+```
+
+4. Unpack nextflow in TSD.
+
+```
+cd
+tar xf PATH_TO_NEXTFLOW.tar
+```
+
+
 
 Nextflow: `/tsd/p164/data/durable/raredisease/nextflow-23.06.0-edge-all`.
 
