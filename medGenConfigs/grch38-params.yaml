@@ -23,6 +23,7 @@ vep_cache_version: 107
 vep_cache: "ref/vep_cache"
 
 # Variant annotation & ranking - SNP / indel
+cadd_resources: ref/CADD-v1.6
 vcfanno_resources: "ref/vcfanno_resources.txt"
 vcfanno_toml: "ref/vcfanno_config.toml"
 #vcfanno_lua: "ref/test/vcfanno_script.lua"

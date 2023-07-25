@@ -294,13 +294,22 @@ The files are downloaded from here:
 
 ### CADD
 
-Files containing only CADD scores, not all annotations, are downloaded for
-use in vcfanno. CADD is stored in a directory under refData with the version number.
+(This was changed, when CADD is implemented as a tool in the pipeline.)
 
-* https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/whole_genome_SNVs.tsv.gz
-* https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/whole_genome_SNVs.tsv.gz.tbi
+CADD installation is described here: https://github.com/kircherlab/CADD-scripts/#manual-installation
 
+Annotation data file downloaded (CADD 1.6):
 
+* https://krishna.gs.washington.edu/download/CADD/v1.6/GRCh38/annotationsGRCh38_v1.6.tar.gz
+
+Put it in a directory with the CADD version:
+
+```
+mkdir -p refData/CADD-v1.6
+cd refData/CADD-v1.6
+wget https://krishna.gs.washington.edu/download/CADD/v1.6/GRCh38/annotationsGRCh38_v1.6.tar.gz
+tar xf annotationsGRCh38_v1.6.tar.gz
+```
 
 ### vcfanno
 
@@ -342,4 +351,5 @@ On 2023-06-09.
 ### genmod - rank_model_snv.ini / rank_model_sv.ini
 
 Initially copied from the test datasets and Clinical Genomics's configs (https://github.com/Clinical-Genomics/reference-files/tree/master/rare-disease/annotation).
+
 

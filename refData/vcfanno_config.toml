@@ -16,12 +16,6 @@ ops=["self", "self", "self", "self"]
 names=["GNOMAD_MTAF_hom", "GNOMAD_MTAF_het", "mitotip_score", "mitotip_trna_prediction"]
 
 [[annotation]]
-file="whole_genome_SNVs.tsv.gz"
-names=["CADD"]
-ops=["mean"]
-columns=[6]
-
-[[annotation]]
 file="clinvar.vcf.gz"
 fields=["CLNSIG", "CLNDN"]
 ops=["self","self"]
