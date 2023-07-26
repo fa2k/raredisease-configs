@@ -10,6 +10,7 @@ export NXF_SINGULARITY_CACHEDIR=$PWD/singularity
 nf-core download \
     --container-system singularity \
     --compress none \
+    --container-cache-utilisation amend \
     raredisease \
     -r 1.1.1
     

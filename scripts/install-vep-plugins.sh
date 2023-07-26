@@ -11,7 +11,7 @@ mkdir -p ../refData/vep_cache/Plugins
 singularity run \
     -B `realpath ../refData/vep_cache`:/vepcache \
     -B `realpath ../refData/vep_cache/Plugins`:/.vep/Plugins \
-    ../singularity/singularity/docker.io-ensemblorg-ensembl-vep-release_107.0.img \
+    ../singularity/docker.io-ensemblorg-ensembl-vep-release_107.0.img \
     /opt/vep/src/ensembl-vep/INSTALL.pl \
         -n -u /vepcache -a p -g LoFtool,MaxEntScan,SpliceAI,dbNSFP,pLI
 

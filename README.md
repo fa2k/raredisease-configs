@@ -29,7 +29,9 @@ be downloaded or generated (see below). Some small files are tracked in git and 
 need to be downloaded. `refData` contains some configuration files, not just reference
 data.
 
-Scripts to download or prepare the reference files are under `scripts`.
+Scripts to download or prepare the reference files are under `scripts`. You can expect
+to have to alter the scripts with new versions of the singularity images, as they use
+specific versions of the tools to do their job.
 
 
 # Nextflow version
@@ -97,6 +99,8 @@ https://nf-co.re/tools/#installation
 doesn't seem to work).
 The version should be selected in the script and committed (as of writing 1.1.1, but check the script). Make sure to use a recent version of nf-core tools (summer 2023), as the container system option has changed.
 
+The tool will ask to install the institutional configuration files. This is not applicable for TSD
+so say no.
 
 ## Pipeline version used
 
@@ -110,7 +114,7 @@ The version should be selected in the script and committed (as of writing 1.1.1,
 
 # Sample sheet 
 
-https://nf-co.re/raredisease/1.0.0/usage#samplesheet
+https://nf-co.re/raredisease/1.1.1/usage#samplesheet
 
 * sample: Name for a specific individual
 * sex: 1=male, 2=female
@@ -245,7 +249,7 @@ https://raw.githubusercontent.com/nf-core/test-datasets/raredisease/reference/ve
 At least the plugin pLI is required in order to run the SNV annotation (ADD_MOST_SEVERE_PLI).
 Other plugins are definitely needed to run the ranking steps in `GENMOD` processes.
 Plugins are installed into the vep_cache dir using the following script. Internet access and
-Docker is required.
+singularity is required.
 
     $ cd scripts
     $ bash install-vep-plugins.sh
@@ -283,9 +287,6 @@ Create bed files and interval_lists from genome dict file using the following sc
     $ cd scripts/
     $ bash create-bed-and-intervals.sh
 
-As it stands, this script requires docker. It could be rewritten to use singularity.
-
-
 
 ### Mitochondrial genome
 
@@ -304,6 +305,10 @@ Genomes: There are two vcf files per chromosome:
 The sites files are used to create the combined gnomad vcf file:
 
     gnomad.genomes.v3.1.2.sites.af.vcf.bgz
+
+The script `make-gnomad-af-file.sh` does this job - but don't expect it to work without some hassle.
+It's a big processing job, and it's done once and not tested again.
+
 
 Gnomad mitochondrial data file is tiny and doesn't need to be reformatted.
 It is used by vcfanno. Downloaded from:
