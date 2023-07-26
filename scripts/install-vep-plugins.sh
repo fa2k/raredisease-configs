@@ -8,15 +8,14 @@
 mkdir -p ../refData/vep_cache/Plugins
 
 # Install plugins
-docker run  -ti --rm -u $UID:$GID \
-    -v `realpath ../refData/vep_cache`:/vepcache \
-    -v `realpath ../refData/vep_cache/Plugins`:/.vep/Plugins \
-    ensemblorg/ensembl-vep:release_107.0 /opt/vep/src/ensembl-vep/INSTALL.pl \
-    -n -u /vepcache -a p -g LoFtool,MaxEntScan,SpliceAI,dbNSFP,pLI
+singularity run \
+    -B `realpath ../refData/vep_cache`:/vepcache \
+    -B `realpath ../refData/vep_cache/Plugins`:/.vep/Plugins \
+    ../singularity/singularity/docker.io-ensemblorg-ensembl-vep-release_107.0.img \
+    /opt/vep/src/ensembl-vep/INSTALL.pl \
+        -n -u /vepcache -a p -g LoFtool,MaxEntScan,SpliceAI,dbNSFP,pLI
 
 # Download reference files
 wget -O ../refData/vep_cache/pLI_values_107.txt https://raw.githubusercontent.com/Ensembl/VEP_plugins/release/107/pLI_values.txt
 wget -O ../refData/vep_cache/LoFtool_scores.txt https://raw.githubusercontent.com/Ensembl/VEP_plugins/release/107/LoFtool_scores.txt
 wget -O - http://hollywood.mit.edu/burgelab/maxent/download/fordownload.tar.gz | (cd ../refData/vep_cache; tar xz)
-
-
