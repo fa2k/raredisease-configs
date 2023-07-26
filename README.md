@@ -19,10 +19,9 @@ Github: https://github.com/nf-core/raredisease (note: master branch is not relev
 
 # Repository overview
 
-The pipeline and container images are stored under `nf-core-raredisease_<version>`.
-
-The container images are also cached under `singularity`, to make it quicker to download
-updates to the pipeline.
+The pipeline is stored under `nf-core-raredisease_<version>`. The container images are
+downloaded to `singularity`, which is also configured as the cacheDir for singularity
+in the nextflow configs.
 
 The reference datasets are stored under `refData`. Most of the reference data have to
 be downloaded or generated (see below). Some small files are tracked in git and don't
