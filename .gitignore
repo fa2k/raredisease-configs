@@ -1,5 +1,6 @@
 singularity
 nf-core-raredisease-*/
+nf-core-raredisease_*/
 refData/archive
 refData/bwamem2/
 refData/CADD-v*/

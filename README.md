@@ -19,7 +19,7 @@ Github: https://github.com/nf-core/raredisease (note: master branch is not relev
 
 # Repository overview
 
-The pipeline and container images are stored under `nf-core-raredisease-<version>`.
+The pipeline and container images are stored under `nf-core-raredisease_<version>`.
 
 The container images are also cached under `singularity`, to make it quicker to download
 updates to the pipeline.
@@ -61,13 +61,13 @@ chmod +x nextflow
    need to explicitly install the plugin into nextflow's home directory.
 
 ```
-nextflow run nf-core/raredisease -r 1.1.0 -profile test,singularity
+nextflow run nf-core/raredisease -r VERSION -profile test,singularity
 rm -r results/ work/
-nextflow plugin install nf-validation@0.3.1
+nextflow plugin install nf-validation
 ```
 
 Note that `medGenConfigs/tsd-settings.conf` specifies this plugin version. The version used
-in the above command has to match the version in the config file.
+there has to match the actual version - see `$HOME/.nextflow/plugins`.
 
 
 3. Copy the nextflow binary and its files across to TSD:
@@ -86,10 +86,6 @@ tar xf PATH_TO_NEXTFLOW.tar
 ```
 
 
-
-Nextflow: `/tsd/p164/data/durable/raredisease/nextflow-23.06.0-edge-all`.
-
-
 # Pipeline and singularity images
 
 The raredisease pipeline is downloaded using the script: `download-pipeline-script.sh`,
@@ -99,13 +95,12 @@ https://nf-co.re/tools/#installation
 
 ...and make sure to follow the instructions to install bioconda. (The temporary `-c bioconda`
 doesn't seem to work).
-The version should be selected in the script and committed (as of writing 1.1.0, but check the
-script).
+The version should be selected in the script and committed (as of writing 1.1.1, but check the script). Make sure to use a recent version of nf-core tools (summer 2023), as the container system option has changed.
 
 
 ## Pipeline version used
 
-* 2023-07 (newer): Pipeline version 1.1.0.
+* 2023-07 (newer): Pipeline version 1.1.1.
 
 * 2023-07: The pipeline downloaded on 2023-06-09, dev branch, was used. Commit:
   decbf4389cc3043b18c61002e023db51348e428b. This is used instead of release
@@ -344,16 +339,19 @@ The files are downloaded from here:
 
 ### CADD
 
-(This was changed, when CADD is implemented as a tool in the pipeline.)
+(This was changed when CADD was implemented as a tool in the pipeline - which enables CADD for indels.)
 
-CADD installation is described here: https://github.com/kircherlab/CADD-scripts/#manual-installation
+CADD installation is described here: https://github.com/kircherlab/CADD-scripts/#manual-installation,
+but it's not necessary to install it, as it's included in the pipeline.
 
-Annotation data file downloaded (CADD 1.6):
+Annotation data file can be downloaded from a link from there (CADD 1.6):
 
 * https://krishna.gs.washington.edu/download/CADD/v1.6/GRCh38/annotationsGRCh38_v1.6.tar.gz
 
+This tar file contains a single directory .... so it can be extracted directly in refData
+(consider confirming this with tar vtf).
 Put it in a directory with the CADD version:
-
+TODO- check what path is expected by pipeline / subdir
 ```
 mkdir -p refData/CADD-v1.6
 cd refData/CADD-v1.6
