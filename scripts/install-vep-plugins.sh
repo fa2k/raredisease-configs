@@ -10,9 +10,10 @@ mkdir -p ../refData/vep_cache/Plugins
 # Install plugins
 singularity run \
     -B `realpath ../refData/vep_cache`:/vepcache \
-    -B `realpath ../refData/vep_cache/Plugins`:/.vep/Plugins \
+    --no-home \
     ../singularity/docker.io-ensemblorg-ensembl-vep-release_107.0.img \
     /opt/vep/src/ensembl-vep/INSTALL.pl \
+	-r /vepcache/Plugins \
         -n -u /vepcache -a p -g LoFtool,MaxEntScan,SpliceAI,dbNSFP,pLI
 
 # Download reference files
