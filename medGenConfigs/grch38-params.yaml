@@ -7,6 +7,7 @@ intervals_wgs: "ref/intervals/wgs.interval_list"
 intervals_y: "ref/intervals/chrY.interval_list"
 target_bed: "ref/intervals/wgs.bed"
 mito_name: "chrM"
+igenomes_base: "ref"
 
 # Config
 analysis_type: "wgs"
