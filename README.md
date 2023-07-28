@@ -345,6 +345,15 @@ The files are downloaded from here:
 
 (This was changed when CADD was implemented as a tool in the pipeline - which enables CADD for indels.)
 
+**CADD doesn't like chr? chromosome names. I've fixed it in a hacky way; needs to be done properly
+but I don't have much time now**
+Replace the entire cadd process file:
+```
+cp -b scripts/cadd-process-fix-main.nf nf-core-raredisease_1.1.1/1_1_1/modules/nf-core/cadd/main.nf
+```
+
+
+
 CADD installation is described here: https://github.com/kircherlab/CADD-scripts/#manual-installation, but it's not necessary to install it, as it's included in the pipeline.
 
 We have to use a custom container image in TSD, as the default container will install packages from conda when running. An advantage of this is that the container doesn't need write access to its filesystem, so we remove the `--writable` (which is troublesome). Original CADD process is here: https://github.com/nf-core/raredisease/blob/dev/modules/nf-core/cadd/main.nf#L12. Even with a custom container, we need to map the annotation data into a specific location (see `medGenConfigs/process-overrides.conf`).
