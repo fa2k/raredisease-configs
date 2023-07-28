@@ -351,8 +351,20 @@ Replace the entire cadd process file:
 ```
 cp -b scripts/cadd-process-fix-main.nf nf-core-raredisease_1.1.1/1_1_1/modules/nf-core/cadd/main.nf
 ```
+Furthermore the pipeline seems to multiply the number of `TABIX_VEP` jobs to the split number squared.
+I don't know if it's a bug or I'm doing something wrong. The subworkflow was modified to use only CADD
+outputs into VEP:
+```
+cp -b scripts/doctored-annotate_snvs.nf nf-core-raredisease_1.1.1/1_1_1/subworkflows/local/annotate_snvs.nf
+```
 
+The annotation from CADD may contain characters that aren't valid utf8. I believe I encountered 0xe9 which is é in latin1 charset - quite plausible. Add an errors="ignore" to python scripts so they don't barf (quick and dirty fix - needs to be handled better). see `scripts/charset-hack`.
 
+PROBLEM REPORTING TODO:
+* CADD chromosome names
+* Number of CADD jobs
+* Non-utf8 characters in the vcf from CADD breaks python script
+---
 
 CADD installation is described here: https://github.com/kircherlab/CADD-scripts/#manual-installation, but it's not necessary to install it, as it's included in the pipeline.
 

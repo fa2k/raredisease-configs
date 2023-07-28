@@ -44,6 +44,7 @@ process CADD {
         cadd_in.vcf
     # Add back chr prefix
     gunzip -c cadd_out.tsv.gz | awk '{if(\$0 !~ /^#/) print "chr"\$0; else print \$0}' | bgzip > ${prefix}.tsv.gz
+    rm cadd_out.tsv.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
