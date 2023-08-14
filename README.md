@@ -421,6 +421,11 @@ On 2023-06-09.
     9b9c76380c565b395fea00bf09681035  clinvar.vcf.gz.tbi
 
 
+The ClinVar files have annotations in the latin1 charset. There are characters outside the
+generally compatible ASCII subset, like é, which upsets the python scripts used in the pipeline.
+The script `convert-clinvar-charset.sh` converts the vcf file to UTF-8. The converted file is used
+in the pipeline.
+
 
 ### genmod - rank_model_snv.ini / rank_model_sv.ini
 
