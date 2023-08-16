@@ -32,6 +32,8 @@ Scripts to download or prepare the reference files are under `scripts`. You can 
 to have to alter the scripts with new versions of the singularity images, as they use
 specific versions of the tools to do their job.
 
+Configuration files to run the pipeline are located in `medGenConfigs`.
+
 
 # Nextflow version
 
@@ -178,7 +180,7 @@ export TMPDIR=/tsd/p164/data/no-backup/active-wgs-analyses/tmp
 
 ## Config
 
-General config files for running raredisease pipeline (in /tsd/p164/data/durable/raredisease/medGenConfigs):
+General config files for running raredisease pipeline (in `medGenConfigs`):
 
 * `process-overrides.conf`: Fine-tuning of resource allocations, and customisations/work-arounds that apply for all environments.
 * `tsd-settings.conf`: TSD Cluster options
@@ -206,7 +208,9 @@ bwamem2 index is precomputed to save time (not required to run the pipeline). Th
 Downloaded from https://support.illumina.com/sequencing/sequencing_software/igenome.html
 Date: 22 May 2023
 Into: /tsd/p164/data/durable/raredisease/refData
-Unpacked in refdata: tar xf Homo_sapiens_NCBI_GRCh38.tar.gz
+
+
+Unpacked in refdata: `tar xf Homo_sapiens_NCBI_GRCh38.tar.gz`
 
     $ md5sum Homo_sapiens_NCBI_GRCh38.tar.gz
     61d263698f0283075f63b1514a16045d  Homo_sapiens_NCBI_GRCh38.tar.gz
@@ -287,6 +291,8 @@ Create bed files and interval_lists from genome dict file using the following sc
     $ bash create-bed-and-intervals.sh
 
 
+TODO this will not be necessary in new versions - https://github.com/nf-core/raredisease/issues/375
+
 ### Mitochondrial genome
 
 (It used to be necessary to supply MT reference files. This is now integrated in the pipeline.)
@@ -351,20 +357,17 @@ Replace the entire cadd process file:
 ```
 cp -b scripts/cadd-process-fix-main.nf nf-core-raredisease_1.1.1/1_1_1/modules/nf-core/cadd/main.nf
 ```
+
 Furthermore the pipeline seems to multiply the number of `TABIX_VEP` jobs to the split number squared.
 I don't know if it's a bug or I'm doing something wrong. The subworkflow was modified to use only CADD
 outputs into VEP:
 ```
 cp -b scripts/doctored-annotate_snvs.nf nf-core-raredisease_1.1.1/1_1_1/subworkflows/local/annotate_snvs.nf
 ```
+https://github.com/nf-core/raredisease/issues/405
 
-The annotation from CADD may contain characters that aren't valid utf8. I believe I encountered 0xe9 which is é in latin1 charset - quite plausible. Add an errors="ignore" to python scripts so they don't barf (quick and dirty fix - needs to be handled better). see `scripts/charset-hack`.
 
-PROBLEM REPORTING TODO:
-* CADD chromosome names
-* Number of CADD jobs
-* Non-utf8 characters in the vcf from CADD breaks python script
----
+* Possible problem to report: MT-analysis has different output INFO and CSQ ? Need to confirm this.
 
 CADD installation is described here: https://github.com/kircherlab/CADD-scripts/#manual-installation, but it's not necessary to install it, as it's included in the pipeline.
 
