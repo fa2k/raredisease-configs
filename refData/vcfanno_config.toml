@@ -22,7 +22,7 @@ ops=["self","self"]
 names=["CLNSIG", "CLNDN"]
 
 [[annotation]]
-file="whole_genome_SNVs.tsv.gz"
+file="whole_genome_SNVs_chr.tsv.gz"
 names=["CADD"]
 ops=["mean"]
 columns=[6]

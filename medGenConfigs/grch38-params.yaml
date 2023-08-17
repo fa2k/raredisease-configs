@@ -15,7 +15,8 @@ outdir: "output"
 
 # Skipping
 skip_cnv_calling: true # We don't have CNV model, so have to skip gatk GermlineCNVCaller
-# TBC: MT analysis may give different annotations in chrM causing VCF tools to fail AND/OR bad sorting
+# TBC: MT analysis seems to work well, but produces a lot of missing annotations on all
+# variant except MT.
 #skip_mt_analysis: true
 
 # Variant annotation (general / other)
