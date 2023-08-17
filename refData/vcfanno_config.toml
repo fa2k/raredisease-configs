@@ -21,3 +21,8 @@ fields=["CLNSIG", "CLNDN"]
 ops=["self","self"]
 names=["CLNSIG", "CLNDN"]
 
+[[annotation]]
+file="whole_genome_SNVs.tsv.gz"
+names=["CADD"]
+ops=["mean"]
+columns=[6]
