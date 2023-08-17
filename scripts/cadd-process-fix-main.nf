@@ -15,8 +15,8 @@ process CADD {
 
     containerOptions {
         (workflow.containerEngine == 'singularity') ?
-            "--no-home --env XDG_CACHE_HOME=/tmp/.cache -B $launchDir/ref/CADD-v1.6:/opt/conda/envs/cadd/share/cadd-scripts-1.6-1/data/annotations" :
-            "--privileged -v ${annotation_dir}:/usr/local/share/cadd-scripts-1.6-1/data/annotations"
+            "--no-home --env XDG_CACHE_HOME=/tmp/.cache -B $launchDir/ref/CADD-v1.6:/opt/conda/share/cadd-scripts-1.6-1/data/annotations" :
+            "--privileged -v ${annotation_dir}:/opt/conda/share/cadd-scripts-1.6-1/data/annotations"
         }
 
     input:
