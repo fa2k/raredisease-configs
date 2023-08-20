@@ -367,8 +367,6 @@ cp -b scripts/doctored-annotate_snvs.nf nf-core-raredisease_1.1.1/1_1_1/subworkf
 https://github.com/nf-core/raredisease/issues/405
 
 
-* Possible problem to report: MT-analysis has different output INFO and CSQ ? Need to confirm this.
-
 CADD installation is described here: https://github.com/kircherlab/CADD-scripts/#manual-installation, but it's not necessary to install it, as it's included in the pipeline.
 
 We have to use a custom container image in TSD, as the default container will install packages from conda when running. An advantage of this is that the container doesn't need write access to its filesystem, so we remove the `--writable` (which is troublesome). Original CADD process is here: https://github.com/nf-core/raredisease/blob/dev/modules/nf-core/cadd/main.nf#L12. Even with a custom container, we need to map the annotation data into a specific location (see `medGenConfigs/process-overrides.conf`).
@@ -386,6 +384,17 @@ cd refData/CADD-v1.6
 wget https://krishna.gs.washington.edu/download/CADD/v1.6/GRCh38/annotationsGRCh38_v1.6.tar.gz
 tar xf annotationsGRCh38_v1.6.tar.gz
 ```
+
+The CADD annotation scripts are only used for indels by the pipeline. For SNVs, we can use vcfanno,
+but this requires us to have a separate reference set for SNV. This is also download from the CADD
+website:
+
+* whole_genome_SNVs.tsv.gz
+
+There have been some issues with the default tbi index. We create a csi index manually using tabix-
+`scripts/make-cadd-index.sh`. Regardless of any problems, this csi index should give a higher performance
+thanks to the better resolution (-m 9). It seems fine that this file contains chromosomes named like 1, 2,
+and the vcf contains chr1, chr2.
 
 
 ### vcfanno
