@@ -14,10 +14,7 @@ analysis_type: "wgs"
 outdir: "output"
 
 # Skipping
-skip_cnv_calling: true # We don't have CNV model, so have to skip gatk GermlineCNVCaller
-# TBC: MT analysis seems to work well, but produces a lot of missing annotations on all
-# variant except MT.
-#skip_mt_analysis: true
+skip_germlinecnvcaller: true
 
 # Variant annotation (general / other)
 variant_catalog: "ref/variant_catalog_grch38.json"
