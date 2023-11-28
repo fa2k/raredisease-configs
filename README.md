@@ -1,5 +1,12 @@
 # Rare Disease Pipeline configuration files and reference data
 
+
+## Warning - this repo is in development trying to follow the dev branch of the pipeline
+
+For configs intended for a specific pipeline release - currently 1.1.1 - see the
+tags in Github.
+
+
 RD pipeline, custom config & ref data location in TSD:
 
 /tsd/p164/data/durable/raredisease
@@ -147,29 +154,7 @@ to the full fastq file paths under `durable/WGS/data_fastq` (this is available f
     ln -s ../../durable/raredisease/refData ref
 ```
 
-3. Create the script file. 
-
-```
-**** TODO -- paste current version of script file here ****
-
-module load singularity/3.7.3
-module load Java/11.0.2
-
-export TMPDIR=/tsd/p164/data/no-backup/active-wgs-analyses/tmp
-
-/tsd/p164/data/durable/raredisease/nextflow-23.06.0-edge-all run \
-	/tsd/p164/data/durable/raredisease/nf-core-raredisease-dev/workflow \
-	-c /tsd/p164/data/durable/raredisease/medGenConfigs/process-overrides.conf \
-	-c /tsd/p164/data/durable/raredisease/medGenConfigs/tsd-settings.conf \
-	-params-file /tsd/p164/data/durable/raredisease/medGenConfigs/grch38-params.yaml \
-	--input samples.csv \
-	--outdir results \
-	--max_memory '500 GB' \
-	--max_cpus 64 \
-	-profile singularity \
-	-resume
-
-```
+3. Create the script file. See `script.sh`.
 
 4. Log on to `p164-submit`, go to the active analysis directory for the project, and run `bash script.sh`.
 
