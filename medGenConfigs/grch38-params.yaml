@@ -27,12 +27,19 @@ vcfanno_resources: "ref/vcfanno_resources.txt"
 vcfanno_toml: "ref/vcfanno_config.toml"
 #vcfanno_lua: "ref/test/vcfanno_script.lua"
 score_config_snv: "ref/rank_model_snv.ini"
+variant_consequences_snv: "ref/variant_consequences_v2.txt"
 gnomad_af: "ref/gnomad.genomes.v3.1.2.af.tab.gz"
 
 # Variant annotation: SV / CNV
 svdb_query_dbs: "ref/svdb_query_dbs.csv"
 score_config_sv: "ref/rank_model_sv.ini"
+variant_consequences_sv: "ref/variant_consequences_v2.txt"
+
+# Variant annotation MT
+score_config_mt: "ref/rank_model_snv.ini"
 
 # Variant filtration
 vep_filters: "ref/hgnc_dummy.txt"
 
+# TODO 
+mobile_element_svdb_annotations: ref/dummy.csv

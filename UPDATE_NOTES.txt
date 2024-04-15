@@ -1,0 +1,15 @@
+# Updated reference data and config files
+
+# 1.1.1 to 2.0.1
+
+* variant_catalog_grch38.json
+
+Downloaded https://raw.githubusercontent.com/Clinical-Genomics/reference-files/master/rare-disease/disease_loci/ExpansionHunter-v5.0.0/variant_catalog_grch38.json
+on 2024-04-15, commit 648e527.
+
+* variant_consequences_v2.txt (new required file)
+
+https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt
+
+
+* TODO: mobile_element_svdb_annotations

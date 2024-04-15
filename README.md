@@ -3,7 +3,7 @@
 
 ## Warning - this repo is in development trying to follow the dev branch of the pipeline
 
-For configs intended for a specific pipeline release - currently 1.1.1 - see the
+For configs intended for a specific pipeline release - currently 2.0.1 - see the
 tags in Github.
 
 
@@ -206,7 +206,7 @@ Unpacked in refdata: `tar xf Homo_sapiens_NCBI_GRCh38.tar.gz`
 
 Downloaded from Stranger github repo (github.com/Clinical-Genomics/stranger): https://raw.githubusercontent.com/Clinical-Genomics/stranger/master/stranger/resources/variant_catalog_grch38.json
 
-Commit of Nov 15 2021 / 9fa3652
+Commit of 2024-04-15 commit 648e527.
 
 /tsd/p164/data/durable/raredisease/refData/variant_catalog_grch38.json
 
@@ -267,6 +267,19 @@ Place these in vep_cache dir. The vep config `ext.args` is defined in the workfl
     cb7b1b692961fe148aab87dcee823d84  spliceai_scores.raw.snv.hg38.vcf.gz.tbi
 
 
+### Variant consequence file
+
+The arguments `variant_consequences_snv` and `variant_consequences_sv`.
+
+The sample file for nf-core is used:
+
+https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt
+
+Downloaded 2024-04-15 / commit 58b0894. This file ranks the severity of the consequences.
+The same file is given as a sample for SNV and SV, so we attempt to use the same for both.
+
+This is tracked in git, as it's small and not many changes are expected.
+
 
 ### Intervals files
 
@@ -290,14 +303,7 @@ gnomAD data downloaded from: https://gnomad.broadinstitute.org/downloads#v3
 Genomes: There are two vcf files per chromosome:
 
     gnomad.genomes.v3.1.2.hgdp_tgp.chr19.vcf.bgz
-    gnomad.genomes.v3.1.2.sites.chr19.vcf.bgz
-
-The sites files are used to create the combined gnomad vcf file:
-
-    gnomad.genomes.v3.1.2.sites.af.vcf.bgz
-
-The script `make-gnomad-af-file.sh` does this job - but don't expect it to work without some hassle.
-It's a big processing job, and it's done once and not tested again.
+    gnomad.genomes.v3.1.2.sites.chr19.vcf.bmobile_element_svdb_annotationsnce and not tested again.
 
 
 Gnomad mitochondrial data file is tiny and doesn't need to be reformatted.
@@ -428,6 +434,12 @@ in the pipeline.
 
 Initially copied from the test datasets and Clinical Genomics's configs (https://github.com/Clinical-Genomics/reference-files/tree/master/rare-disease/annotation).
 
+
+
+### Mobile elements annotation
+
+mobile_element_svdb_annotations
+TODO
 
 # DeepVariant - GPU
 
