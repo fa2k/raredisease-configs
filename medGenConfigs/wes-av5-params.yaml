@@ -1,0 +1,53 @@
+
+# Parameter file for use with exomes. Only one params file is allowed when running nextflow,
+# so we have to supply all the same params as in the WGS file grch38-params.yaml.
+
+
+
+# Genome
+genome: "GRCh38"
+fasta: "ref/Homo_sapiens/NCBI/GRCh38/Sequence/WholeGenomeFasta/genome.fa"
+bwa: "ref/Homo_sapiens/NCBI/GRCh38/Sequence/BWAIndex/version0.6.0/"
+bwamem2: "ref/bwamem2"
+intervals_wgs: "ref/intervals/wgs.interval_list"
+intervals_y: "ref/intervals/chrY.interval_list"
+# Enable exome target file
+# The reference data files are not tracked neatly in a system-independent way like with
+# WGS references - I just use the direct paths in TSD project p164, for simplicity.
+target_bed: "/ess/p164/data/durable/raredisease/Exome/S04380110_hs_hg38/S04380110_Regions.bed"
+mito_name: "chrM"
+igenomes_base: "ref"
+
+
+# Config (note exome option enabled)
+analysis_type: "wes"
+pcr_amplification: true
+# The rest of this file is the same as for WGS
+outdir: "output"
+
+# Skipping
+skip_cnv_calling: true # We don't have CNV model, so have to skip gatk GermlineCNVCaller
+# TBC: MT analysis seems to work well, but produces a lot of missing annotations on all
+# variant except MT.
+skip_mt_analysis: true
+
+# Variant annotation (general / other)
+variant_catalog: "ref/variant_catalog_grch38.json"
+vep_cache_version: 107
+vep_cache: "ref/vep_cache"
+
+# Variant annotation & ranking - SNP / indel
+cadd_resources: "ref/CADD-v1.6"
+vcfanno_resources: "ref/vcfanno_resources.txt"
+vcfanno_toml: "ref/vcfanno_config.toml"
+#vcfanno_lua: "ref/test/vcfanno_script.lua"
+score_config_snv: "ref/rank_model_snv.ini"
+gnomad_af: "ref/gnomad.genomes.v3.1.2.af.tab.gz"
+
+# Variant annotation: SV / CNV
+svdb_query_dbs: "ref/svdb_query_dbs.csv"
+score_config_sv: "ref/rank_model_sv.ini"
+
+# Variant filtration
+vep_filters: "ref/hgnc_dummy.txt"
+
