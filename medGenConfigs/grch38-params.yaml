@@ -20,6 +20,7 @@ skip_germlinecnvcaller: true
 variant_catalog: "ref/variant_catalog_grch38.json"
 vep_cache_version: 107
 vep_cache: "ref/vep_cache"
+vep_plugin_files: "ref/vep_files.csv"
 
 # Variant annotation & ranking - SNP / indel
 cadd_resources: "ref/CADD-v1.6"
@@ -41,5 +42,7 @@ score_config_mt: "ref/rank_model_snv.ini"
 # Variant filtration
 vep_filters: "ref/hgnc_dummy.txt"
 
-# TODO 
-mobile_element_svdb_annotations: ref/dummy.csv
+# Mobile element SV annotation is set to the same as the SV annotation
+# This is similar to the example in the documentation, but it may not
+# be informative.
+mobile_element_svdb_annotations: "ref/svdb_query_dbs.csv"

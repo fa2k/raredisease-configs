@@ -16,6 +16,8 @@ refData/README.txt
 refData/svdb_query_dbs.csv
 refData/variant_catalog_grch38.json
 refData/vep_cache
+refData/vep_files
+refData/vep_files.csv
 refData/vcfanno_resources.txt
 ._*
 .DS_Store

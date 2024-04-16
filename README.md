@@ -6,6 +6,8 @@
 For configs intended for a specific pipeline release - currently 2.0.1 - see the
 tags in Github.
 
+Changes to the reference data are described in UPDATE_NOTES.txt (as a supplement to the commit
+history)
 
 RD pipeline, custom config & ref data location in TSD:
 
@@ -242,11 +244,20 @@ singularity is required.
     $ cd scripts
     $ bash install-vep-plugins.sh
 
-Script executed & downloads performed 2023-05-26. Accessed:
+Script executed 2023-05-26.
 
-- https://raw.githubusercontent.com/Ensembl/VEP_plugins/release/107/pLI_values.txt
-- https://raw.githubusercontent.com/Ensembl/VEP_plugins/release/107/LoFtool_scores.txt
-- http://hollywood.mit.edu/burgelab/maxent/download/fordownload.tar.gz
+
+### VEP plugin data files
+
+The data files are enumerated in `vep_files_template.csv`, which is fed to the
+`vep_plugin_files` argument. The file `vep_files.csv` is created from the template
+using the script `make-absolute-paths.sh`. The following reference data download
+commands were run on 2023-05-26 (not actually run like this, but files are adapted 
+from an earlier structure for pipeline 1.1.1).
+
+    wget -O refData/vep_files/pLI_values_107.txt https://raw.githubusercontent.com/Ensembl/VEP_plugins/release/107/pLI_values.txt
+    wget -O refData/vep_files/LoFtool_scores.txt https://raw.githubusercontent.com/Ensembl/VEP_plugins/release/107/LoFtool_scores.txt
+    wget -O - http://hollywood.mit.edu/burgelab/maxent/download/fordownload.tar.gz | (cd refData/vep_files; tar xz)
 
 
 * Additional reference data for SpliceAI from Illumina (only available after BaseSpace login) *

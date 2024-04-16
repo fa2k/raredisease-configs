@@ -12,4 +12,12 @@ on 2024-04-15, commit 648e527.
 https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt
 
 
-* TODO: mobile_element_svdb_annotations
+* mobile_element_svdb_annotations: No ref data were downloaded for this yet,
+  the gnomad SV files were used instead.
+
+* vep plugin files moved from vep_cache to vep_files:
+
+    LoFtool_scores.txt, pLI_values.txt, spliceai*.
+
+    New file vep_files_template.csv created (instanciable with make-absolute-paths.sh)
+
