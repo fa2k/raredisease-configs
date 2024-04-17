@@ -5,7 +5,6 @@ bwa: "ref/Homo_sapiens/NCBI/GRCh38/Sequence/BWAIndex/version0.6.0/"
 bwamem2: "ref/bwamem2"
 intervals_wgs: "ref/intervals/wgs.interval_list"
 intervals_y: "ref/intervals/chrY.interval_list"
-target_bed: "ref/intervals/wgs.bed"
 mito_name: "chrM"
 igenomes_base: "ref"
 
