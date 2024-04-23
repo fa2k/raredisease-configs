@@ -1,13 +1,16 @@
 import argparse
 import gzip
 import sys
+import logging
 
 # Setup command-line argument parser
 parser = argparse.ArgumentParser(description='Extract and annotate most severe consequences from VCF CSQ field.')
 parser.add_argument('input_vcf', help='Input VCF file (can be .vcf or .vcf.gz)')
 parser.add_argument('output_vcf', type=argparse.FileType('w'), nargs='?', default='-',
                     help='Output VCF file (uncompressed .vcf). If not provided, will be written to stdout.')
-parser.add_argument('--severity_file', help='File with sorted list of consequences by severity', default='ref/variant_consequences_v2.txt')
+parser.add_argument('--severity-file', help='File with sorted list of consequences by severity', default='ref/variant_consequences_v2.txt')
+parser.add_argument('--filter-variants-severity', default='intergenic_variant,downstream_gene_variant,upstream_gene_variant', 
+                    help='Remove variants with these specific consequences (comma-separated list)')
 
 args = parser.parse_args()
 
@@ -36,13 +39,15 @@ def find_most_severe(severity_order, consequence_index, canonical_index, csq_str
 with open(args.severity_file, 'r') as f:
     severity_order = [line.strip() for line in f]
 
-def process_vcf(input_vcf, out_vcf):
+def process_vcf(input_vcf, out_vcf, severity_order, filter_variants_severity):
     if input_vcf.endswith('.gz'):
         open_func = gzip.open
     else:
         open_func = open
     consequence_index = None
     canonical_index = None
+    total_variants = 0
+    kept_variants = 0
     with open_func(input_vcf, 'rt') as vcf:
         for line in vcf:
             if line.startswith('##INFO=<ID=CSQ'):
@@ -64,6 +69,7 @@ def process_vcf(input_vcf, out_vcf):
                                      "Consequence and CANONICAL fields.")
             else:
                 # Data section of vcf
+                total_variants += 1
                 parts = line.strip().split('\t')
                 info_field = parts[7]  # INFO column
                 info_data = dict(item.split('=') for item in info_field.split(';') if '=' in item)
@@ -72,7 +78,14 @@ def process_vcf(input_vcf, out_vcf):
                     # Create new INFO entry
                     info_data['CSQ'] = most_severe
                     info_field = ";".join(f"{k}={v}" for k, v in info_data.items())
-                parts[7] = info_field
-                out_vcf.write('\t'.join(parts) + '\n')
 
-process_vcf(args.input_vcf, args.output_vcf)
+                    # Implement filtering by skipping variants with irrelevant consequences
+                    if most_severe.split('|')[consequence_index] in filter_variants_severity:
+                        continue
+                parts[7] = info_field
+                kept_variants += 1
+                out_vcf.write('\t'.join(parts) + '\n')
+    logging.info(f"Postprocessing complete")
+    logging.info(f"Consequence severity filter kept {kept_variants} out of {total_variants} variants")
+
+process_vcf(args.input_vcf, args.output_vcf, severity_order, args.filter_variants_severity.split(','))
