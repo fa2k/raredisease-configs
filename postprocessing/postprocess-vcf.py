@@ -23,8 +23,8 @@ def severity_order_key(severity_order, consequence_index, canonical_index, conse
         [severity_order.index(cons) for cons in consequence_string.split('&')]
     )
     canonical_string = consequence.split('|')[canonical_index]
-
-    return (top_severity, canonical_string == 'YES')
+    # Return a tuple for sorting. Lower value is more severe, and canonical is preferred.
+    return (top_severity, canonical_string != 'YES')
 
 # Function to parse the CSQ field and find the most severe consequence
 def find_most_severe(severity_order, consequence_index, canonical_index, csq_string):
