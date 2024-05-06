@@ -7,11 +7,13 @@ RAREDISEASE_DIR=$( dirname $SCRIPT_DIR )
 basename=$( basename $INPUT )
 output=${basename%_vep_csq_pli.vcf.gz}_postProc_forFiltus.vcf.gz
 
+WORKING_DIR=$( realpath $PWD )
+
 singularity exec \
-    -B $PWD \
+    -B $WORKING_DIR \
     -B $SCRIPT_DIR/postprocess-vcf.py:/postprocess-vcf.py \
-    -B $PWD/ref/variant_consequences_v2.txt:/variant_consequences_v2.txt \
-    -W $PWD \
+    -B $WORKING_DIR/ref/variant_consequences_v2.txt:/variant_consequences_v2.txt \
+    -W $WORKING_DIR \
     $RAREDISEASE_DIR/singularity/depot.galaxyproject.org-singularity-python-3.8.3.img \
     python /postprocess-vcf.py \
         --severity-file /variant_consequences_v2.txt \
