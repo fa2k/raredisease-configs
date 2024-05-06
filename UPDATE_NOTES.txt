@@ -1,6 +1,24 @@
 # Updated reference data and config files
 
-# 1.1.1 to 2.0.1
+# 1.1.1 to xxxxx
+
+## Using new version of available resources
+
+* gnomAD 4.1 TODO
+
+gsutil cp  gs://gcp-public-data--gnomad/release/4.1/vcf/joint/* .
+
+
+
+* CADD-v1.7
+
+	- Downloaded pre-scored SNP vcf files https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh38/whole_genome_SNVs.tsv.gz
+	- Updated vcfanno_resources.txt to point to CADD 1.7 SNP files
+	- Downloaded annotation data for off-line use: https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh38/GRCh38_v1.7.tar.gz
+	- (TODO= Updating CADD itself)
+
+
+## Updating or adding files due to pipeline changes
 
 * variant_catalog_grch38.json
 
