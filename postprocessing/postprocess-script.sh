@@ -1,13 +1,11 @@
 #!/bin/bash
 
-INPUT=$1
+INPUT="$1"
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 RAREDISEASE_DIR=$( dirname $SCRIPT_DIR )
 
-basename=$( basename $INPUT )
-output=${basename%_vep_csq_pli.vcf.gz}_postProc_forFiltus.vcf.gz
-
-WORKING_DIR=$( realpath $PWD )
+basenameinput=$( basename $INPUT )
+output=${basenameinput%_vep_csq_pli.vcf.gz}_postProc_forFiltus.vcf.gz
 
 singularity exec \
     -B $WORKING_DIR \
