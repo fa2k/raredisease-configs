@@ -314,7 +314,14 @@ gnomAD data downloaded from: https://gnomad.broadinstitute.org/downloads#v3
 Genomes: There are two vcf files per chromosome:
 
     gnomad.genomes.v3.1.2.hgdp_tgp.chr19.vcf.bgz
-    gnomad.genomes.v3.1.2.sites.chr19.vcf.bmobile_element_svdb_annotationsnce and not tested again.
+    gnomad.genomes.v3.1.2.sites.chr19.vcf.bgz
+
+The sites files are used to create the combined gnomad vcf file:
+
+    gnomad.genomes.v3.1.2.sites.af.vcf.bgz
+
+The script `make-gnomad-af-file.sh` does this job - but don't expect it to work without some hassle.
+It's a big processing job, and it's done once and not tested again.
 
 
 Gnomad mitochondrial data file is tiny and doesn't need to be reformatted.
