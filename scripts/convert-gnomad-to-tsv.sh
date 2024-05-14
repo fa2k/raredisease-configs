@@ -4,12 +4,12 @@
 # - Chromosome
 # - Position
 # - Reference and alternate alleles (comma-separated)
-# - Allele frequency
+# - Allele frequency (uses AF_joint, which is the allele frequency in the combined exome and genome dataset)
 
-gunzip -c ../refData/gnomad.genomes.v3.1.2.sites.af.vcf.bgz | \
+gunzip -c ../refData/gnomad.joint.v4.1.sites.af.vcf.bgz | \
            awk -F "\t" -v OFS='\t' \
-                '!/^#/ {split($8,a,";"); for(i in a) if(a[i] ~ /^AF=/) {split(a[i],b,"="); print $1, $2, $4 "," $5, b[2]}}' \
+                '!/^#/ {split($8,a,";"); for(i in a) if(a[i] ~ /^AF_joint=/) {split(a[i],b,"="); print $1, $2, $4 "," $5, b[2]}}' \
                 | \
-            singularity run ../singularity/depot.galaxyproject.org-singularity-bcftools-1.17--haef29d1_0.img \
+            singularity run ../singularity/depot.galaxyproject.org-singularity-bcftools-1.18--h8b25389_0.img \
                 bgzip \
-                > ../refData/gnomad.genomes.v3.1.2.af.tab.gz
+                > ../refData/gnomad.joint.v4.1.af.tab.gz

@@ -22,13 +22,13 @@ vep_cache: "ref/vep_cache"
 vep_plugin_files: "ref/vep_files.csv"
 
 # Variant annotation & ranking - SNP / indel
-cadd_resources: "ref/CADD-v1.6"
+cadd_resources: "ref/CADD-v1.7"
 vcfanno_resources: "ref/vcfanno_resources.txt"
 vcfanno_toml: "ref/vcfanno_config.toml"
 #vcfanno_lua: "ref/test/vcfanno_script.lua"
 score_config_snv: "ref/rank_model_snv.ini"
 variant_consequences_snv: "ref/variant_consequences_v2.txt"
-gnomad_af: "ref/gnomad.genomes.v3.1.2.af.tab.gz"
+gnomad_af: "ref/gnomad.joint.v4.1.af.tab.gz"
 
 # Variant annotation: SV / CNV
 svdb_query_dbs: "ref/svdb_query_dbs.csv"
