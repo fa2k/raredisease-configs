@@ -44,15 +44,21 @@ Downloaded https://raw.githubusercontent.com/Clinical-Genomics/reference-files/m
 on 2024-04-15, commit 648e527.
 
 
-### VEP cache updated from 107 to 112
+### VEP cache updated from 107 to 110
 
 See also below about how the files were restructured due to pipeline changes.
-New VEP cache is downloaded.
+New VEP cache is downloaded. See README file.
 
 
 ### ClinVar
 
-TODO
+    cd scripts/clinvar 
+    # (make this directory)
+	wget https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20240520.vcf.gz
+	wget https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20240520.vcf.gz.tbi
+
+TODO: enable new files
+
 
 ### spliceAI
 

@@ -3,7 +3,10 @@
 
 ## Warning - this repo is in development trying to follow the dev branch of the pipeline
 
-For configs intended for a specific pipeline release - currently 2.0.1 - see the
+Status: This config is now able to run successfully on the dev branch. Will target the next release after 2.0.1.
+CADD is not intended to work directly. CADD 1.7 is not on the way to the pipeline yet, but there is an issue for it.
+
+For configs intended for a specific pipeline release - currently 1.1.1 - see the
 tags in Github.
 
 Changes to the reference data are described in UPDATE_NOTES.txt (as a supplement to the commit
@@ -114,6 +117,8 @@ so say no.
 
 ## Pipeline version used
 
+* 2024-??: Pipeline version 2.x TODO!
+
 * 2023-07 (newer): Pipeline version 1.1.1.
 
 * 2023-07: The pipeline downloaded on 2023-06-09, dev branch, was used. Commit:
@@ -214,19 +219,19 @@ Commit of 2024-04-15 commit 648e527.
 
 
 
-### VEP cache (v112)
+### VEP cache (v110)
 
 Downloaded from Ensembl website https://www.ensembl.org/info/docs/tools/vep/script/vep_cache.html
 
-curl -O https://ftp.ensembl.org/pub/release-112/variation/indexed_vep_cache/homo_sapiens_vep_112_GRCh38.tar.gz
+curl -O https://ftp.ensembl.org/pub/release-110/variation/indexed_vep_cache/homo_sapiens_merged_vep_110_GRCh38.tar.gz
 
 Untarred in refData/vep_cache/
 
-    $ tar xf homo_sapiens_vep_112_GRCh38.tar.gz
+    $ tar xf homo_sapiens_merged_vep_110_GRCh38.tar.gz
 
 
 
-### VEP plugins (v112)
+### VEP plugins (v110)
 
 Plugin information from VEP here: https://www.ensembl.org/info/docs/tools/vep/script/vep_plugins.html
 

@@ -1,6 +1,8 @@
 # Genome
 genome: "GRCh38"
 fasta: "ref/Homo_sapiens/NCBI/GRCh38/Sequence/WholeGenomeFasta/genome.fa"
+fai: "ref/Homo_sapiens/NCBI/GRCh38/Sequence/WholeGenomeFasta/genome.fa.fai"
+sequence_dictionary: "ref/Homo_sapiens/NCBI/GRCh38/Sequence/WholeGenomeFasta/genome.dict"
 bwa: "ref/Homo_sapiens/NCBI/GRCh38/Sequence/BWAIndex/version0.6.0/"
 bwamem2: "ref/bwamem2"
 intervals_wgs: "ref/intervals/wgs.interval_list"
@@ -15,9 +17,15 @@ outdir: "output"
 # Skipping
 skip_germlinecnvcaller: true
 
+# TODO - try to get a reference for mobile elements, to run this
+skip_me_calling: true
+
+# TODO troubleshoot peddy failing
+skip_peddy: true
+
 # Variant annotation (general / other)
 variant_catalog: "ref/variant_catalog_grch38.json"
-vep_cache_version: 107
+vep_cache_version: 110
 vep_cache: "ref/vep_cache"
 vep_plugin_files: "ref/vep_files.csv"
 
