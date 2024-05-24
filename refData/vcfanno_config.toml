@@ -7,7 +7,7 @@ file="vcfanno_functions.lua"
 file="gnomad.joint.v4.1.sites.af.vcf.bgz"
 fields = ["AF_joint", "AF_genomes", "AF_grpmax_joint"]
 ops=["self", "self", "self"]
-names=["gnomadAF_joint", "gnomadAF_genomes", "gnomadAF_joint_grpmax"]
+names=["GNOMADAF", "gnomadAF_genomes", "gnomadAF_joint_grpmax"]
 
 [[annotation]]
 file="gnomad.genomes.v3.1.sites.chrM.vcf.bgz"

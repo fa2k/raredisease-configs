@@ -257,12 +257,11 @@ Script executed 2023-05-26.
 The data files are enumerated in `vep_files_template.csv`, which is fed to the
 `vep_plugin_files` argument. The file `vep_files.csv` is created from the template
 using the script `make-absolute-paths.sh`. The following reference data download
-commands were run on 2023-05-26 (not actually run like this, but files are adapted 
-from an earlier structure for pipeline 1.1.1).
+commands were run on 2024-05-24 (adapted from an earlier structure for pipeline 
+2.x / VEP 110).
 
-    wget -O refData/vep_files/pLI_values_107.txt https://raw.githubusercontent.com/Ensembl/VEP_plugins/release/107/pLI_values.txt
-    wget -O refData/vep_files/LoFtool_scores.txt https://raw.githubusercontent.com/Ensembl/VEP_plugins/release/107/LoFtool_scores.txt
-    wget -O - http://hollywood.mit.edu/burgelab/maxent/download/fordownload.tar.gz | (cd refData/vep_files; tar xz)
+    wget -O refData/vep_files/pLI_values_110.txt https://raw.githubusercontent.com/Ensembl/VEP_plugins/release/110/pLI_values.txt
+    wget -O refData/vep_files/LoFtool_scores.txt https://raw.githubusercontent.com/Ensembl/VEP_plugins/release/110/LoFtool_scores.txt
 
 
 * Additional reference data for SpliceAI from Illumina (only available after BaseSpace login) *

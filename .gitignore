@@ -4,7 +4,7 @@ nf-core-raredisease_*/
 refData/archive
 refData/bwamem2/
 refData/CADD-v*/
-refData/clinvar-*/
+refData/clinvar*/
 refData/Homo_sapiens/**
 refData/intervals/*
 refData/gnomad.joint.*gz
