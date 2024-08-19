@@ -1,6 +1,6 @@
 vep_files
 PATH/vep_files/LoFtool_scores.txt
-PATH/vep_files/pLI_values_110.txt
+PATH/vep_files/pLI_values.txt
 PATH/vep_files/spliceai_scores.raw.indel.hg38.vcf.gz
 PATH/vep_files/spliceai_scores.raw.indel.hg38.vcf.gz.tbi
 PATH/vep_files/spliceai_scores.raw.snv.hg38.vcf.gz
