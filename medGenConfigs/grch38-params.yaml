@@ -15,7 +15,10 @@ analysis_type: "wgs"
 outdir: "output"
 
 # Skipping
+# We don't have a panel of normals for this - can't run GCNVCaller
 skip_germlinecnvcaller: true
+# Don't filter by gene
+skip_vep_filter: true
 
 # TODO - try to get a reference for mobile elements, to run this
 skip_me_calling: true
@@ -45,9 +48,6 @@ variant_consequences_sv: "ref/variant_consequences_v2.txt"
 
 # Variant annotation MT
 score_config_mt: "ref/rank_model_snv.ini"
-
-# Variant filtration
-vep_filters: "ref/hgnc_dummy.txt"
 
 # Mobile element SV annotation is set to the same as the SV annotation
 # This is similar to the example in the documentation, but it may not
