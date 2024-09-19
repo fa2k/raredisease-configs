@@ -264,6 +264,11 @@ commands were run on 2024-05-24 (adapted from an earlier structure for pipeline
     wget -O refData/vep_files/LoFtool_scores.txt https://raw.githubusercontent.com/Ensembl/VEP_plugins/release/110/LoFtool_scores.txt
 
 
+MaxEntScan data: The necessary files are in an archive called fordownload.tar.gz. (Accessed 2024-08-26)
+
+    cd refData/vep_files && wget http://hollywood.mit.edu/burgelab/maxent/download/fordownload.tar.gz && tar xzf fordownload.tar.gz
+
+
 * Additional reference data for SpliceAI from Illumina (only available after BaseSpace login) *
 
 Download link here:

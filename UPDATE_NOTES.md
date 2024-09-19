@@ -6,7 +6,7 @@
 
 ### gnomAD 4.1 Short variants
 
-gsutil cp  gs://gcp-public-data--gnomad/release/4.1/vcf/joint/* .
+    gsutil cp  gs://gcp-public-data--gnomad/release/4.1/vcf/joint/* .
 
 gnomAD scripts updated and ran again:
 
@@ -15,7 +15,12 @@ gnomAD scripts updated and ran again:
 
 The annotations in gnomAD now contain joint allele frequencies with both WES and WGS. The VCF fields added by vcfanno are
 now named: gnomadAF_joint, gnomadAF_joint_grpmax, gnomadAF_genomes. The grpmax field is the AF in the genetic ancestry group
-with the highest AF. vcfanno_config.toml and vcfanno_resources_template.txt updated with new gnomAD.
+with the highest AF. The previous names are needed for pipeline compatibility:
+
+* GNOMADAF=gnomadAF_joint
+* GNOMADAF_popmax=gnomadAF_joint_grpmax
+
+vcfanno_config.toml and vcfanno_resources_template.txt updated with new gnomAD.
 
 New resource files:
 
@@ -29,7 +34,7 @@ There is no new gnomAD for chrM.
 ### gnomAD SV TODO
 
 
-### CADD-v1.7
+### ~~CADD-v1.7~~ -- probably will not update CADD, stay on 1.6
 
 	- Downloaded pre-scored SNP vcf files https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh38/whole_genome_SNVs.tsv.gz
 	- Updated vcfanno_resources.txt to point to CADD 1.7 SNP files
@@ -48,6 +53,7 @@ on 2024-04-15, commit 648e527.
 
 See also below about how the files were restructured due to pipeline changes.
 New VEP cache is downloaded. See README file.
+VEP plugins and pluging data installed again.
 
 
 ### ClinVar
@@ -57,7 +63,7 @@ New VEP cache is downloaded. See README file.
 	wget https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20240520.vcf.gz
 	wget https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20240520.vcf.gz.tbi
 
-TODO: enable new files
+TODO: enable new files / update clinvar
 
 
 ### spliceAI
@@ -75,7 +81,7 @@ https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_cons
 * mobile_element_svdb_annotations: No ref data were downloaded for this yet,
   the gnomad SV files were used instead.
 
-* vep plugin files moved from vep_cache to vep_files:
+* vep plugin data files moved from vep_cache to vep_files:
 
     LoFtool_scores.txt, pLI_values.txt, spliceai*.
 
