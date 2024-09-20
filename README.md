@@ -346,16 +346,16 @@ The `gnomad_af` argument expects a tab.gz file, not a VCF. Run:
 
 ### gnomAD SV
 
-gnomAD SV is only available for version 2.1, which is aligned to hg19. We should instead
-use a remapped version of gnomAD SV 2.1 (map to GRCh38) from dbVar. These files contain
-the allele frequencies of SVs in various populations.
+SV is available for gnomAD 4.1. Here is information from gnomAD.
 
-Info here: https://www.ncbi.nlm.nih.gov/sites/dbvarapp/studies/nstd166/
+Info here: https://gnomad.broadinstitute.org/news/2023-11-v4-structural-variants/
+
+The SV resource file is configured in svdb_query_dbs.csv.
 
 The files are downloaded from here:
 
-* https://ftp.ncbi.nlm.nih.gov/pub/dbVar/data/Homo_sapiens/by_study/vcf/nstd166.GRCh38.variant_call.vcf.gz
-* https://ftp.ncbi.nlm.nih.gov/pub/dbVar/data/Homo_sapiens/by_study/vcf/nstd166.GRCh38.variant_call.vcf.gz.tbi
+* https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/genome_sv/gnomad.v4.1.sv.sites.vcf.gz
+* https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/genome_sv/gnomad.v4.1.sv.sites.vcf.gz.tbi
 
 
 ### CADD

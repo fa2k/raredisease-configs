@@ -26,7 +26,9 @@ New resource files:
 There is no new gnomAD for chrM.
 
 
-### gnomAD SV TODO
+### gnomAD SV
+
+gnomAD SV has been updated from gnomAD 2 to 4.1. See README file for the dataset used.
 
 
 ### CADD-v1.7
