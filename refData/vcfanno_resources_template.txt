@@ -2,7 +2,7 @@ gnomad.joint.v4.1.sites.af.vcf.bgz
 gnomad.joint.v4.1.sites.af.vcf.bgz.tbi
 gnomad.genomes.v3.1.sites.chrM.vcf.bgz
 gnomad.genomes.v3.1.sites.chrM.vcf.bgz.tbi
-clinvar-2023-06-09/clinvar_utf8.vcf.gz
-clinvar-2023-06-09/clinvar_utf8.vcf.gz.tbi
+clinvar-2024-09-19/clinvar.vcf.gz
+clinvar-2024-09-19/clinvar.vcf.gz.tbi
 CADD-v1.6/whole_genome_SNVs.tsv.gz
 CADD-v1.6/whole_genome_SNVs.tsv.gz.tbi

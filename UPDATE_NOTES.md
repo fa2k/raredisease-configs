@@ -31,7 +31,9 @@ New resource files:
 There is no new gnomAD for chrM.
 
 
-### gnomAD SV TODO
+### gnomAD SV v4.1
+
+D
 
 
 ### ~~CADD-v1.7~~ -- probably will not update CADD, stay on 1.6

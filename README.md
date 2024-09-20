@@ -318,7 +318,7 @@ TODO this will not be necessary in new versions - https://github.com/nf-core/rar
 
 ### gnomAD
 
-gnomAD data downloaded from: https://gnomad.broadinstitute.org/downloads / actually Google: gs://gcp-public-data--gnomad/release/4.1/vcf/joint/*.
+gnomAD data downloaded from: https://gnomad.broadinstitute.org/downloads / actually Google: gs://gcp-public-data--gnomad/release/4.1/vcf/joint/
 
 Genomes: There is one vcf file per chromosome:
 
@@ -351,16 +351,7 @@ The `gnomad_af` argument expects a tab.gz file, not a VCF. Run:
 
 ### gnomAD SV
 
-gnomAD SV is only available for version 2.1, which is aligned to hg19. We should instead
-use a remapped version of gnomAD SV 2.1 (map to GRCh38) from dbVar. These files contain
-the allele frequencies of SVs in various populations.
-
-Info here: https://www.ncbi.nlm.nih.gov/sites/dbvarapp/studies/nstd166/
-
-The files are downloaded from here:
-
-* https://ftp.ncbi.nlm.nih.gov/pub/dbVar/data/Homo_sapiens/by_study/vcf/nstd166.GRCh38.variant_call.vcf.gz
-* https://ftp.ncbi.nlm.nih.gov/pub/dbVar/data/Homo_sapiens/by_study/vcf/nstd166.GRCh38.variant_call.vcf.gz.tbi
+A new gnomAD SV is vailable for version 4.1.
 
 
 ### CADD
@@ -432,16 +423,17 @@ Downloaded from:
 
 https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/
 
-On 2023-06-09.
+On 2024-09-19.
 
-    9379313cbfdb0abb8ff7b40b0ae8d810  clinvar.vcf.gz
-    9b9c76380c565b395fea00bf09681035  clinvar.vcf.gz.tbi
+    TODO  clinvar.vcf.gz
+    TODO  clinvar.vcf.gz.tbi
 
 
 The ClinVar files have annotations in the latin1 charset. There are characters outside the
 generally compatible ASCII subset, like é, which upsets the python scripts used in the pipeline.
 The script `convert-clinvar-charset.sh` converts the vcf file to UTF-8. The converted file is used
 in the pipeline.
+TODO - do we still need to convert charset? Test w/o or report bug
 
 
 ### genmod - rank_model_snv.ini / rank_model_sv.ini
