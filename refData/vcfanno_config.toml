@@ -5,9 +5,9 @@ file="vcfanno_functions.lua"
 
 [[annotation]]
 file="gnomad.joint.v4.1.sites.af.vcf.bgz"
-fields = ["AF_joint", "AF_genomes", "AF_grpmax_joint"]
-ops=["self", "self", "self"]
-names=["GNOMADAF_joint", "gnomadAF_genomes", "GNOMADAF_grpmax_joint"]
+fields = ["AF_joint", "AF_genomes", "AF_grpmax_joint", "AF_joint", "AF_grpmax_joint"]
+ops=["self", "self", "self", "self", "self"]
+names=["gnomadAF_joint", "gnomadAF_genomes", "GNOMADAF_grpmax_joint", "GNOMADAF", "GNOMADAF_popmax"]
 
 [[annotation]]
 file="gnomad.genomes.v3.1.sites.chrM.vcf.bgz"
@@ -16,7 +16,7 @@ ops=["self", "self", "self", "self"]
 names=["GNOMAD_MTAF_hom", "GNOMAD_MTAF_het", "mitotip_score", "mitotip_trna_prediction"]
 
 [[annotation]]
-file="clinvar_utf8.vcf.gz"
+file="clinvar.vcf.gz"
 fields=["CLNSIG", "CLNDN"]
 ops=["self","self"]
 names=["CLNSIG", "CLNDN"]

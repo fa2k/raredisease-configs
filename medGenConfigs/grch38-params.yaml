@@ -22,9 +22,8 @@ skip_vep_filter: true
 
 # TODO - try to get a reference for mobile elements, to run this
 skip_me_calling: true
-
-# TODO troubleshoot peddy failing
-skip_peddy: true
+skip_me_annotation: true
+#mobile_element_references: "ref/me_dummy.csv"
 
 # Variant annotation (general / other)
 variant_catalog: "ref/variant_catalog_grch38.json"
@@ -33,7 +32,8 @@ vep_cache: "ref/vep_cache"
 vep_plugin_files: "ref/vep_files.csv"
 
 # Variant annotation & ranking - SNP / indel
-cadd_resources: "ref/CADD-v1.7"
+#cadd_resources: "ref/CADD-v1.7"
+cadd_resources: "ref/CADD-v1.6"
 vcfanno_resources: "ref/vcfanno_resources.txt"
 vcfanno_toml: "ref/vcfanno_config.toml"
 #vcfanno_lua: "ref/test/vcfanno_script.lua"
@@ -53,3 +53,4 @@ score_config_mt: "ref/rank_model_snv.ini"
 # This is similar to the example in the documentation, but it may not
 # be informative.
 mobile_element_svdb_annotations: "ref/svdb_query_dbs.csv"
+
