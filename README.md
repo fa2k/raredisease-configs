@@ -346,7 +346,7 @@ The `gnomad_af` argument expects a tab.gz file, not a VCF. Run:
 
 ### gnomAD SV
 
-SV is available for gnomAD 4.1. Here is information from gnomAD.
+Structural variants are available for gnomAD 4.1. Here is information from gnomAD.
 
 Info here: https://gnomad.broadinstitute.org/news/2023-11-v4-structural-variants/
 
@@ -356,6 +356,10 @@ The files are downloaded from here:
 
 * https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/genome_sv/gnomad.v4.1.sv.sites.vcf.gz
 * https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/genome_sv/gnomad.v4.1.sv.sites.vcf.gz.tbi
+
+The structural variant files contain CNVs, that don't have Allele Count or Allele Frequency information.
+A script `gnomad-sv-remove-lines-without-af-an.sh` is used to remove all lines that don't have "AC", so that
+the file can be used as a database by svdb.
 
 
 ### CADD
