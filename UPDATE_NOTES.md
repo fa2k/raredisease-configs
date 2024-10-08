@@ -54,12 +54,7 @@ New VEP cache is downloaded. See README file.
 
 ### ClinVar
 
-    cd scripts/clinvar 
-    # (make this directory)
-	wget https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20240520.vcf.gz
-	wget https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_20240520.vcf.gz.tbi
-
-TODO: enable new files
+ClinVar was updated on 2024-09-19, by downloading the current clinvar files.
 
 
 ### spliceAI
