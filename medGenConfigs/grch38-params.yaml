@@ -27,7 +27,7 @@ skip_me_annotation: true
 
 # Variant annotation (general / other)
 variant_catalog: "ref/variant_catalog_grch38.json"
-vep_cache_version: 112
+vep_cache_version: 110
 vep_cache: "ref/vep_cache"
 vep_plugin_files: "ref/vep_files.csv"
 
