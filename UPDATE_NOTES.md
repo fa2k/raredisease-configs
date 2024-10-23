@@ -78,3 +78,4 @@ https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_cons
 
     New file vep_files_template.csv created (instanciable with make-absolute-paths.sh)
 
+* nextflow updated to 24.04.4 (TODO confirm version in prod)
