@@ -15,7 +15,7 @@ mkdir -p ../refData/vep_cache/Plugins
 singularity run \
     -B `realpath ../refData/vep_cache`:/vepcache \
     --no-home \
-    docker://ensemblorg/ensembl-vep:release_110.1 \
+    docker://ensemblorg/ensembl-vep:release_113.0 \
     INSTALL.pl \
 	-r /vepcache/Plugins \
         -n -u /vepcache -a p -g LoFtool,MaxEntScan,SpliceAI,dbNSFP,pLI
