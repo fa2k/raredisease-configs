@@ -48,7 +48,7 @@ Downloaded https://raw.githubusercontent.com/Clinical-Genomics/reference-files/m
 on 2024-04-15, commit 648e527.
 
 
-### VEP cache updated from 107 to 112
+### VEP cache updated from 107 to 110
 
 See also below about how the files were restructured due to pipeline changes.
 New VEP cache is downloaded. See README file.
