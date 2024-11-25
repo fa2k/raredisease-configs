@@ -23,7 +23,6 @@ skip_vep_filter: true
 # TODO - try to get a reference for mobile elements, to run this
 skip_me_calling: true
 skip_me_annotation: true
-#mobile_element_references: "ref/me_dummy.csv"
 
 # Variant annotation (general / other)
 variant_catalog: "ref/variant_catalog_grch38.json"

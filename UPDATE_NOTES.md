@@ -31,7 +31,9 @@ There is no new gnomAD for chrM.
 gnomAD SV has been updated from gnomAD 2 to 4.1. See README file for the dataset used.
 
 
-### CADD-v1.7
+### CADD-v1.7 -- NOT USED
+
+I was not able to get it to work. Staying on version 1.6.post1.
 
 	- Downloaded pre-scored SNP vcf files https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh38/whole_genome_SNVs.tsv.gz
 	- Updated vcfanno_resources.txt to point to CADD 1.7 SNP files
@@ -46,7 +48,7 @@ Downloaded https://raw.githubusercontent.com/Clinical-Genomics/reference-files/m
 on 2024-04-15, commit 648e527.
 
 
-### VEP cache updated from 107 to 112
+### VEP cache updated from 107 to 110
 
 See also below about how the files were restructured due to pipeline changes.
 New VEP cache is downloaded. See README file.
@@ -59,7 +61,7 @@ ClinVar was updated on 2024-09-19, by downloading the current clinvar files.
 
 ### spliceAI
 
-TODO
+The same SpiceAI files are used.
 
 
 ## Updating or adding files due to pipeline changes
