@@ -9,10 +9,10 @@ export NXF_SINGULARITY_CACHEDIR=$PWD/singularity
 # conda update nf-core
 
 # Download pipeline
-nf-core download \
+nf-core pipelines download \
     --container-system singularity \
     --compress none \
-    --container-cache-utilisation amend \
+    --container-cache-utilisation copy \
     raredisease \
-    -r 2.0.1
+    -r dev
     
