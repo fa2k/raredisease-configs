@@ -7,34 +7,36 @@
 # Genome
 genome: "GRCh38"
 fasta: "ref/Homo_sapiens/NCBI/GRCh38/Sequence/WholeGenomeFasta/genome.fa"
+fai: "ref/Homo_sapiens/NCBI/GRCh38/Sequence/WholeGenomeFasta/genome.fa.fai"
+sequence_dictionary: "ref/Homo_sapiens/NCBI/GRCh38/Sequence/WholeGenomeFasta/genome.dict"
 bwa: "ref/Homo_sapiens/NCBI/GRCh38/Sequence/BWAIndex/version0.6.0/"
 bwamem2: "ref/bwamem2"
 intervals_wgs: "ref/intervals/wgs.interval_list"
 intervals_y: "ref/intervals/chrY.interval_list"
+mito_name: "chrM"
+igenomes_base: "ref"
 # Enable exome target file
 # The reference data files are not tracked neatly in a system-independent way like with
 # WGS references - I just use the direct paths in TSD project p164, for simplicity.
 target_bed: "/ess/p164/data/durable/raredisease/Exome/S04380110_hs_hg38/S04380110_Regions.bed"
-mito_name: "chrM"
-igenomes_base: "ref"
-
 
 # Config (note exome option enabled)
 analysis_type: "wes"
-pcr_amplification: true
 # The rest of this file is the same as for WGS
 outdir: "output"
 
 # Skipping
-skip_cnv_calling: true # We don't have CNV model, so have to skip gatk GermlineCNVCaller
-# TBC: MT analysis seems to work well, but produces a lot of missing annotations on all
-# variant except MT.
-skip_mt_analysis: true
+skip_germlinecnvcaller: true
+skip_vep_filter: true
+
+skip_me_calling: true
+skip_me_annotation: true
 
 # Variant annotation (general / other)
 variant_catalog: "ref/variant_catalog_grch38.json"
-vep_cache_version: 107
+vep_cache_version: 110
 vep_cache: "ref/vep_cache"
+vep_plugin_files: "ref/vep_files.csv"
 
 # Variant annotation & ranking - SNP / indel
 cadd_resources: "ref/CADD-v1.6"
@@ -42,12 +44,18 @@ vcfanno_resources: "ref/vcfanno_resources.txt"
 vcfanno_toml: "ref/vcfanno_config.toml"
 #vcfanno_lua: "ref/test/vcfanno_script.lua"
 score_config_snv: "ref/rank_model_snv.ini"
-gnomad_af: "ref/gnomad.genomes.v3.1.2.af.tab.gz"
+variant_consequences_snv: "ref/variant_consequences_v2.txt"
+gnomad_af: "ref/gnomad.joint.v4.1.af.tab.gz"
 
 # Variant annotation: SV / CNV
 svdb_query_dbs: "ref/svdb_query_dbs.csv"
 score_config_sv: "ref/rank_model_sv.ini"
+variant_consequences_sv: "ref/variant_consequences_v2.txt"
 
-# Variant filtration
-vep_filters: "ref/hgnc_dummy.txt"
+# Variant annotation MT
+score_config_mt: "ref/rank_model_snv.ini"
 
+# Mobile element SV annotation is set to the same as the SV annotation
+# This is similar to the example in the documentation, but it may not
+# be informative.
+mobile_element_svdb_annotations: "ref/svdb_query_dbs.csv"

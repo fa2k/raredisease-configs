@@ -1,6 +1,13 @@
 #!/bin/bash
 
 INPUT="$1"
+
+if [ -z "$1" ]
+then
+	echo "usage: postprocess-script.sh FILE_NAME"
+	exit 1
+fi
+
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 RAREDISEASE_DIR=$( dirname $SCRIPT_DIR )
 
