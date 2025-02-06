@@ -30,10 +30,10 @@ process CADD {
     mv $vcf tmpfile.vcf.gz
     gunzip -c tmpfile.vcf.gz | sed "s/^chrM/MT/" | sed "s/^chr//" | bgzip >  $vcf
     cadd.sh \\
-        -o ${prefix}-tmp.tsv.gz \\
+        -o tmpoutputfile \\
         $args \\
         $vcf
-    gunzip -c ${prefix}-tmp.tsv.gz | sed "s/^MT/M/" | sed "s/^[^#]/chr/" | bgzip > ${prefix}.tsv.gz
+    gunzip -c tmpoutputfile | sed "s/^MT/M/" | sed 's/^\\([^#]\\)/chr\\1/' | bgzip > ${prefix}.tsv.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
