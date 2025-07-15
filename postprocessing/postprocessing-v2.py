@@ -4,6 +4,8 @@ import argparse
 import gzip
 import sys
 import logging
+import tempfile
+import shutil
 
 # --------------------------------------------------------------------------
 # Functions
@@ -38,6 +40,34 @@ def find_most_severe(severity_order, consequence_index, canonical_index, csq_str
     )
     return prioritized[0]
 
+
+class DataTypeInferrer:
+
+    def __init__(self):
+        self.is_int = True
+        self.is_float = True
+    
+    def update(self, value):
+        if value != "":
+            if self.is_int:
+                try:
+                    int(value)
+                except:
+                    self.is_int = False
+            if self.is_float:
+                try:
+                    float(value)
+                except:
+                    self.is_float = False
+
+    def typename(self):
+        if self.is_int:
+            return "Integer"
+        elif self.is_float:
+            return "Float"
+        else:
+            return "String"
+
 # --------------------------------------------------------------------------
 # Main
 # --------------------------------------------------------------------------
@@ -53,8 +83,11 @@ def main():
                         help='Output VCF file (uncompressed .vcf). If not provided, stdout.')
     parser.add_argument('--severity-file', default='ref/variant_consequences_v2.txt',
                         help='File with ordered list of consequences, from most to least severe.')
+    parser.add_argument('--tempfile', type=str, help='Temporary file to write (uses system temp by default).')
     parser.add_argument('--filter-variants-severity', default='intergenic_variant,downstream_gene_variant,upstream_gene_variant',
                         help='Comma-separated list of consequences to skip (filter) entirely.')
+    parser.add_argument('--compounds-max-length', default=1000,
+                        help='Truncate Compounds and CompoundsNormalized INFO fields to this length.')
     args = parser.parse_args()
 
     logging.basicConfig(stream=sys.stderr, level=logging.INFO)
@@ -67,10 +100,18 @@ def main():
     filter_out_severities = set(args.filter_variants_severity.split(','))
 
     # Decide how to open the VCF
-    if args.input_vcf.endswith('.gz'):
+    if args.input_vcf.endswith(".gz"):
         open_func = gzip.open
     else:
         open_func = open
+
+    # Creates a temp file to write the body of the VCF before creating the headers.
+    # It's necessary to first process the entire VCF in order to infer the data types to use in the
+    # header.
+    if args.tempfile:
+        temp_body = open(args.tempfile, "w+")
+    else:
+        temp_body = tempfile.TemporaryFile(mode="w+")
 
     # We will collect the CSQ field structure (so we know which index is Consequence, CANONICAL, etc.)
     csq_fields = []
@@ -81,6 +122,9 @@ def main():
     kept_variants = 0
 
     with open_func(args.input_vcf, 'rt') as vcf:
+        header_lines = []
+        chrom_line = None
+
         for line in vcf:
             if line.startswith('##INFO=<ID=CSQ'):
                 # Example line:
@@ -90,37 +134,22 @@ def main():
                     format_index = line.index('Format:') + len('Format:')
                     format_string = line[format_index:].strip().strip('">')
                     csq_fields = format_string.split('|')
+                    csq_datatypes = [DataTypeInferrer() for _ in csq_fields]
                     # Identify these positions, if present
                     if 'Consequence' in csq_fields:
                         consequence_index = csq_fields.index('Consequence')
                     if 'CANONICAL' in csq_fields:
                         canonical_index = csq_fields.index('CANONICAL')
 
-                # We still write the original line to the output if you like,
-                # or you might want to remove it if you're not going to keep CSQ at all.
-                # For clarity, let's keep the original meta-line in the header:
-                args.output_vcf.write(line)
+                # Keep original CSQ header line? No, we remove that annotation.
+                #args.output_vcf.write(line)
 
             elif line.startswith('##'):
-                # Other VCF header lines (meta-information)
+                # Other VCF header lines (meta-information). Can write immediately, we don't need to change them.
                 args.output_vcf.write(line)
 
             elif line.startswith('#CHROM'):
-                # The VCF column header line
-                # Insert a note about this script
-                args.output_vcf.write("##postprocess_vcf=convertCSQtoINFO\n")
-                args.output_vcf.write("##postprocess_vcf_args=" + " ".join(sys.argv[1:]) + "\n")
-
-                # Optionally, add an INFO header for each of the new VEP_ fields:
-                #   E.g. ##INFO=<ID=VEP_Allele,Number=1,Type=String,Description="From VEP CSQ: Allele">
-                # This can help downstream tools. We'll do it if we found the CSQ fields:
-                if csq_fields:
-                    for f_name in csq_fields:
-                        # Keep it short and sweet here
-                        info_hdr = f'##INFO=<ID=VEP_{f_name},Number=1,Type=String,Description="From VEP CSQ: {f_name}">\n'
-                        args.output_vcf.write(info_hdr)
-
-                args.output_vcf.write(line)
+                chrom_line = line
 
                 # Validate we found essential fields
                 if consequence_index is None:
@@ -130,6 +159,8 @@ def main():
                     logging.warning("No CANONICAL field found in CSQ header; canonical transcripts won't be prioritized.")
                     
             else:
+                if not chrom_line:
+                    raise ValueError("Invalid format, missing #CHROM line.")
                 # Data line (a variant)
                 total_variants += 1
                 parts = line.strip().split('\t')
@@ -161,13 +192,17 @@ def main():
                         # Store in info_data
                         # If a field is empty, we might choose to skip it or set it to '.'
                         info_data[key] = value if value else '.'
+                        csq_datatypes[idx].update(value)
 
                     # Remove the original CSQ so that downstream tools don't get confused
                     del info_data['CSQ']
-
-                # If you also want to remove other large fields (e.g., "Compounds"), do so:
-                info_data.pop("Compounds", None)
-                info_data.pop("CompoundsNormalized", None)
+                
+                # Truncate long strings
+                if args.compounds_max_length != -1:
+                    if "Compounds" in info_data:
+                        info_data["Compounds"] = info_data["Compounds"][:args.compounds_max_length]
+                    if "CompoundsNormalized" in info_data:
+                        info_data["CompoundsNormalized"] = info_data["CompoundsNormalized"][:args.compounds_max_length]
 
                 # Rebuild the INFO string
                 new_info_list = []
@@ -177,8 +212,28 @@ def main():
                 new_info_list.extend(info_flags)
 
                 parts[7] = ";".join(new_info_list)
-                args.output_vcf.write('\t'.join(parts) + '\n')
+                temp_body.write('\t'.join(parts) + '\n')
                 kept_variants += 1
+
+    # Add an INFO header for each of the new VEP_ fields:
+    #   E.g. ##INFO=<ID=VEP_Allele,Number=1,Type=String,Description="From VEP CSQ: Allele">
+    # This can help downstream tools. We'll do it if we found the CSQ fields:
+    if csq_fields:
+        for f_name, f_type in zip(csq_fields, csq_datatypes):
+            info_hdr = f'##INFO=<ID=VEP_{f_name},Number=1,Type={f_type.typename()},Description="From VEP CSQ: {f_name}">\n'
+            args.output_vcf.write(info_hdr)
+
+    # The VCF column header line
+    # Insert a note about this script
+    args.output_vcf.write("##postprocess_vcf=convertCSQtoINFO\n")
+    args.output_vcf.write("##postprocess_vcf_args=" + " ".join(sys.argv[1:]) + "\n")
+    args.output_vcf.write(chrom_line)
+
+    logging.info("Reformatting complete, copying temporary data.")
+
+    temp_body.flush()
+    temp_body.seek(0)
+    shutil.copyfileobj(temp_body, args.output_vcf)
 
     logging.info("Processing complete.")
     logging.info(f"Kept {kept_variants} out of {total_variants} variants.")

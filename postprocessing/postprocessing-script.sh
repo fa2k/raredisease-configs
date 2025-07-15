@@ -24,6 +24,7 @@ singularity exec \
     $RAREDISEASE_DIR/nf-core-raredisease_*/singularity-images/depot.galaxyproject.org-singularity-python-3.8.3.img \
     python /postprocessing-v2.py \
         --severity-file /variant_consequences_v2.txt \
+        --tempfile tempfile.vcf.temp \
         $INPUT \
         | \
     singularity exec \
