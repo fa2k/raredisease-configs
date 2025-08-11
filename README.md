@@ -3,7 +3,7 @@
 
 ## Warning - this repo is in development trying to follow the dev branch of the pipeline
 
-Status: This config is now able to run successfully on the dev branch. Will target the next release after 2.0.1.
+Status: This config is targeting release 2.6.0, but is not complete.
 CADD is not intended to work directly. CADD 1.7 is not on the way to the pipeline yet, but there is an issue for it.
 
 For configs intended for a specific pipeline release - currently 1.1.1 - see the

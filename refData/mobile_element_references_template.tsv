@@ -1,0 +1,5 @@
+type	path
+ALU	PATH/mobile_elements/grch38_ALU.bed
+L1	PATH/mobile_elements/grch38_L1.bed
+SVA	PATH/mobile_elements/grch38_SVA.bed
+HERV	PATH/mobile_elements/grch38_HERV.bed

@@ -14,5 +14,5 @@ nf-core pipelines download \
     --compress none \
     --container-cache-utilisation copy \
     raredisease \
-    -r dev
+    -r 2.6.0
     

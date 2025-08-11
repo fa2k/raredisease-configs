@@ -25,12 +25,16 @@ analysis_type: "wes"
 # The rest of this file is the same as for WGS
 outdir: "output"
 
-# Skipping
-skip_germlinecnvcaller: true
-skip_vep_filter: true
+# Skip Tools:
+# gens: Requires panels of normals, intervals and other input files. TODO.
+# germlinecnvcaller: We don't have a panel of normals for this - can't run GCNVCaller
+skip_tools: gens,germlinecnvcaller
 
-skip_me_calling: true
-skip_me_annotation: true
+# Skip Subworkflows:
+# me_annotation: In the Clinical Genomics's environment, ME annotation is used for allele frequency
+# annotations. I don't have such information for the cohorts, so it's skipped.
+# generate_clinical_set: filtered outputs - not required for research.
+skip_subworkflows: me_annotation,generate_clinical_set
 
 # Variant annotation (general / other)
 variant_catalog: "ref/variant_catalog_grch38.json"
@@ -55,7 +59,6 @@ variant_consequences_sv: "ref/variant_consequences_v2.txt"
 # Variant annotation MT
 score_config_mt: "ref/rank_model_snv.ini"
 
-# Mobile element SV annotation is set to the same as the SV annotation
-# This is similar to the example in the documentation, but it may not
-# be informative.
-mobile_element_svdb_annotations: "ref/svdb_query_dbs.csv"
+# Mobile element calling
+mobile_element_references: "ref/mobile_element_references.tsv"
+

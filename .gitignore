@@ -19,5 +19,6 @@ refData/vep_cache
 refData/vep_files
 refData/vep_files.csv
 refData/vcfanno_resources.txt
+refData/mobile_element_references.tsv
 ._*
 .DS_Store

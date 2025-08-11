@@ -1,6 +1,19 @@
 # Updated reference data and config files
 
-# 1.1.1 to xxxxx
+# 2024-12-dev to 2.6.0
+
+
+## Added mobile element reference
+
+See info: scripts/mobile_elements.md
+
+
+
+
+
+# 1.1.1 to 2024-12-dev
+
+A dev version from not long after 2.2.0 was used for some period, due to problems with the 2.2.0 release.
 
 ## Using new version of available resources
 
