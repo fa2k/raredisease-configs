@@ -18,7 +18,11 @@ igenomes_base: "ref"
 # Enable exome target file
 # The reference data files are not tracked neatly in a system-independent way like with
 # WGS references - I just use the direct paths in TSD project p164, for simplicity.
-target_bed: "/tsd/p164/data/durable/raredisease/Exome/S04380110_hs_hg38/S04380110_Padded_noHeader.bed"
+# For version 2.6.0 - use unpadded file, trying to add the padding option
+# There is a problem with the pipeline if using the pre-padded file and 
+target_bed: "/tsd/p164/data/durable/raredisease/Exome/S04380110_hs_hg38/S04380110_Regions_noHeader.bed"
+# Set 100 bp padding explicitly, which is also the default
+bait_padding: 100
 
 # Config (note exome option enabled)
 analysis_type: "wes"
@@ -28,13 +32,15 @@ outdir: "output"
 # Skip Tools:
 # gens: Requires panels of normals, intervals and other input files. TODO.
 # germlinecnvcaller: We don't have a panel of normals for this - can't run GCNVCaller
-skip_tools: gens,germlinecnvcaller
+# haplogrep3, vcf2cytosure / crashes, to be investigated
+skip_tools: gens,germlinecnvcaller,haplogrep3,vcf2cytosure
 
 # Skip Subworkflows:
 # me_annotation: In the Clinical Genomics's environment, ME annotation is used for allele frequency
 # annotations. I don't have such information for the cohorts, so it's skipped.
 # generate_clinical_set: filtered outputs - not required for research.
-skip_subworkflows: me_annotation,generate_clinical_set
+# sv_calling: Have crashed on WES data, probably not very useful anyway
+skip_subworkflows: me_annotation,generate_clinical_set,sv_calling
 
 # Variant annotation (general / other)
 variant_catalog: "ref/variant_catalog_grch38.json"
