@@ -7,7 +7,9 @@
 
 See info: scripts/mobile_elements.md
 
+## Updated ClinVar
 
+2025-08-29
 
 
 

@@ -3,6 +3,7 @@
 import argparse
 import gzip
 import sys
+import os
 import logging
 import tempfile
 import shutil
@@ -84,8 +85,7 @@ def main():
     parser.add_argument('--severity-file', default='ref/variant_consequences_v2.txt',
                         help='File with ordered list of consequences, from most to least severe.')
     parser.add_argument('--tempfile', type=str, help='Temporary file to write (uses system temp by default).')
-    parser.add_argument('--filter-variants-severity', default='intergenic_variant,downstream_gene_variant,upstream_gene_variant',
-                        help='Comma-separated list of consequences to skip (filter) entirely.')
+    parser.add_argument('--filter-variants-severity', help='Comma-separated list of consequences to skip (filter) entirely.')
     parser.add_argument('--compounds-max-length', default=1000,
                         help='Truncate Compounds and CompoundsNormalized INFO fields to this length.')
     args = parser.parse_args()
@@ -97,7 +97,10 @@ def main():
         severity_order = [line.strip() for line in f if line.strip()]
 
     # Parse user-specified severities to remove
-    filter_out_severities = set(args.filter_variants_severity.split(','))
+    if args.filter_variants_severity:
+        filter_out_severities = set(args.filter_variants_severity.split(','))
+    else:
+        filter_out_severities = set()
 
     # Decide how to open the VCF
     if args.input_vcf.endswith(".gz"):
@@ -234,6 +237,10 @@ def main():
     temp_body.flush()
     temp_body.seek(0)
     shutil.copyfileobj(temp_body, args.output_vcf)
+
+    if args.tempfile:
+        temp_body.close()
+        os.remove(args.tempfile)
 
     logging.info("Processing complete.")
     logging.info(f"Kept {kept_variants} out of {total_variants} variants.")
