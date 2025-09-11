@@ -56,6 +56,7 @@ vcfanno_toml: "ref/vcfanno_config.toml"
 score_config_snv: "ref/rank_model_snv.ini"
 variant_consequences_snv: "ref/variant_consequences_v2.txt"
 gnomad_af: "ref/gnomad.joint.v4.1.af.tab.gz"
+reduced_penetrance: "ref/grch38_reduced_penetrance_-v1.0-_clinical-genomics-nallo.tsv"
 
 # Variant annotation: SV / CNV
 svdb_query_dbs: "ref/svdb_query_dbs.csv"

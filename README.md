@@ -187,6 +187,16 @@ Everything below is about reference data!
 **The details here should be updated when new reference data are downloaded.** The old reference data may be moved into `archive/`.
 
 
+
+### Reduced penetrance genes
+
+Copied from Clinical Genomics's Nallo pipeline reference set:
+
+https://github.com/Clinical-Genomics/reference-files/blob/383062271c05fd23481867359817179333d2f626/nallo/annotation/grch38_reduced_penetrance_-v1.0-.tsv
+
+This file is committed to git due to its small size.
+
+
 ### bwamem2 index
 
 bwamem2 index is precomputed to save time (not required to run the pipeline). The script `make-bwamem2.sh` handles this:
